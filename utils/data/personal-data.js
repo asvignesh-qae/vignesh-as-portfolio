@@ -8,6 +8,7 @@ export const personalData = {
   address: "Budapest, Hungary",
   github: "https://github.com/asvignesh-qae",
   linkedIn: "https://www.linkedin.com/in/vignesh-a-s",
+  whatsApp: "https://wa.me/918144474445",
   stackOverflow: "https://stackoverflow.com/users/14340495/vignesh-a-s",
   leetcode: "https://leetcode.com/u/logicchaser14/",
   codeWars: "https://www.codewars.com/users/logicchaser14",

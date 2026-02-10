@@ -4,10 +4,10 @@
 import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
 import Link from "next/link";
-import { BsGithub, BsLinkedin } from "react-icons/bs";
+import { BsGithub, BsLinkedin, BsWhatsapp } from "react-icons/bs";
 import { MdDownload } from "react-icons/md";
 import { RiContactsFill } from "react-icons/ri";
-import { SiLeetcode, SiCodewars, SiStackoverflow } from "react-icons/si";
+import { SiLeetcode, SiCodewars } from "react-icons/si";
 import { TypeAnimation } from "react-type-animation";
 
 function HeroSection() {
@@ -65,13 +65,6 @@ function HeroSection() {
               <BsLinkedin size={30} />
             </Link>
             <Link
-              href={personalData.stackOverflow}
-              target="_blank"
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <SiStackoverflow size={30} />
-            </Link>
-            <Link
               href={personalData.leetcode}
               target="_blank"
               className="transition-all text-pink-500 hover:scale-125 duration-300"
@@ -85,25 +78,46 @@ function HeroSection() {
             >
               <SiCodewars size={30} />
             </Link>
+            <Link
+              href={personalData.whatsApp}
+              target="_blank"
+              className="transition-all text-pink-500 hover:scale-125 duration-300"
+            >
+              <BsWhatsapp size={30} />
+            </Link>
           </div>
 
           {/* Stats Counter Bar */}
           <div className="mb-8 grid grid-cols-2 gap-4 md:grid-cols-4 w-full">
             <div className="rounded-lg border border-[#1b2c68a0] bg-[#0d1224] px-4 py-3 text-center">
-              <span className="block text-2xl font-bold text-[#16f2b3]">9+</span>
-              <span className="text-xs text-gray-400 uppercase tracking-wider">Years Exp.</span>
+              <span className="block text-2xl font-bold text-[#16f2b3]">
+                9+
+              </span>
+              <span className="text-xs text-gray-400 uppercase tracking-wider">
+                Years Exp.
+              </span>
             </div>
             <div className="rounded-lg border border-[#1b2c68a0] bg-[#0d1224] px-4 py-3 text-center">
-              <span className="block text-2xl font-bold text-[#16f2b3]">5+</span>
-              <span className="text-xs text-gray-400 uppercase tracking-wider">Frameworks</span>
+              <span className="block text-2xl font-bold text-[#16f2b3]">
+                5+
+              </span>
+              <span className="text-xs text-gray-400 uppercase tracking-wider">
+                Frameworks
+              </span>
             </div>
             <div className="rounded-lg border border-[#1b2c68a0] bg-[#0d1224] px-4 py-3 text-center">
               <span className="block text-2xl font-bold text-[#16f2b3]">2</span>
-              <span className="text-xs text-gray-400 uppercase tracking-wider">Countries</span>
+              <span className="text-xs text-gray-400 uppercase tracking-wider">
+                Countries
+              </span>
             </div>
             <div className="rounded-lg border border-[#1b2c68a0] bg-[#0d1224] px-4 py-3 text-center">
-              <span className="block text-2xl font-bold text-[#16f2b3]">CI/CD</span>
-              <span className="text-xs text-gray-400 uppercase tracking-wider">Integrated</span>
+              <span className="block text-2xl font-bold text-[#16f2b3]">
+                CI/CD
+              </span>
+              <span className="text-xs text-gray-400 uppercase tracking-wider">
+                Integrated
+              </span>
             </div>
           </div>
 
@@ -158,14 +172,30 @@ function HeroSection() {
               <div>
                 <span className="ml-4 lg:ml-8 mr-2 text-white">role:</span>
                 <span className="text-gray-400">{`'`}</span>
-                <span className="text-amber-300">Senior SDET</span>
+                <span className="text-amber-300">
+                  Senior Software Test Automation Engineer/ SDET
+                </span>
                 <span className="text-gray-400">{`',`}</span>
               </div>
               <div>
-                <span className="ml-4 lg:ml-8 mr-2 text-white">experience:</span>
+                <span className="ml-4 lg:ml-8 mr-2 text-white">
+                  experience:
+                </span>
                 <span className="text-gray-400">{`'`}</span>
                 <span className="text-amber-300">9+ years</span>
                 <span className="text-gray-400">{`',`}</span>
+              </div>
+              <div className="ml-4 lg:ml-8 mr-2">
+                <span className=" text-white">languages:</span>
+                <span className="text-gray-400">{`['`}</span>
+                <span className="text-amber-300">Java</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">JavaScript</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">TypeScript</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">Python - Basics</span>
+                <span className="text-gray-400">{"'],"}</span>
               </div>
               <div className="ml-4 lg:ml-8 mr-2">
                 <span className=" text-white">frameworks:</span>
@@ -196,7 +226,7 @@ function HeroSection() {
               </div>
               <div>
                 <span className="ml-4 lg:ml-8 mr-2 text-white">
-                  cicdExpert:
+                  cicdConfigured:
                 </span>
                 <span className="text-orange-400">true</span>
                 <span className="text-gray-400">,</span>
@@ -225,7 +255,7 @@ function HeroSection() {
                 <span className="ml-12 lg:ml-24 text-cyan-400">this.</span>
                 <span className="mr-2 text-white">experience</span>
                 <span className="mr-2 text-amber-300">&gt;=</span>
-                <span className="text-orange-400">5</span>
+                <span className="text-orange-400">9</span>
                 <span className="text-amber-300"> &amp;&amp;</span>
               </div>
               <div>
