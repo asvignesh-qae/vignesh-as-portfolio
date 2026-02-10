@@ -1,20 +1,20 @@
 export const educations = [
   {
     id: 1,
-    title: "Bachelor Degree",
-    duration: "2020 - Present",
-    institution: "National University of Bangladesh",
+    title: "Bachelor of Engineering in Computer Science",
+    duration: "2007 - 2011",
+    institution: "Anna University, Chennai, India",
   },
   {
     id: 2,
     title: "Higher Secondary Certificate",
-    duration: "2018 - 2020",
-    institution: "Noakhali Islamia Kamil Madrasah",
+    duration: "2005 - 2007",
+    institution: "Zion Matriculation Higher Secondary School, Chennai, India",
   },
   {
     id: 3,
     title: "Secondary School Certificate",
-    duration: "2008 - 2018",
-    institution: "Baitus Saif Islamia Madrasah",
+    duration: "1995 - 2005",
+    institution: "St. Joseph's Matriculation Higher Secondary School, Hosur, India",
   }
 ]

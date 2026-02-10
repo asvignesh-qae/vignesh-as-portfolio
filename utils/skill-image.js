@@ -82,7 +82,18 @@ import kubernetes from '../app/assets/svg/skills/kubernetes.svg'
 import linux from '../app/assets/svg/skills/linux.svg'
 import sqlalchemy from '../app/assets/svg/skills/sqlalchemy.svg'
 import fastapi from '../app/assets/svg/skills/fastapi.svg'
-
+import playwright from '../app/assets/svg/skills/playwright.svg'
+import cypress from '../app/assets/svg/skills/cypress.svg'
+import jenkins from '../app/assets/svg/skills/jenkins.svg'
+import githubActions from '../app/assets/svg/skills/github-actions.svg'
+import cucumber from '../app/assets/svg/skills/cucumber.svg'
+import testng from '../app/assets/svg/skills/testng.svg'
+import restassured from '../app/assets/svg/skills/restassured.svg'
+import bdd from '../app/assets/svg/skills/bdd.svg'
+import atdd from '../app/assets/svg/skills/atdd.svg'
+import testplanning from '../app/assets/svg/skills/testplanning.svg'
+import solid from '../app/assets/svg/skills/solid.svg'
+import accessibility from '../app/assets/svg/skills/accessibility.svg'
 
 
 export const skillsImage = (skill) => {
@@ -254,6 +265,28 @@ export const skillsImage = (skill) => {
       return sqlalchemy;
     case 'fastapi':
       return fastapi;
+    case 'playwright':
+      return playwright;
+    case 'cypress':
+      return cypress;
+    case 'jenkins':
+      return jenkins;
+    case 'github actions':
+      return githubActions;
+    case 'cucumber':
+      return cucumber;
+    case 'testng':
+      return testng;
+    case 'rest assured':
+      return restassured;
+    case 'test planning':
+      return testplanning;
+    case 'solid principles':
+      return solid;
+    case 'accessibility testing wcag':
+      return accessibility;
+    case 'python - basics':
+      return python;
     default:
       break;
   }

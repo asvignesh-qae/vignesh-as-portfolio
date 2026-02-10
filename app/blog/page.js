@@ -1,17 +1,27 @@
 // @flow strict
 
 import { personalData } from "@/utils/data/personal-data";
+import { localBlogs } from "@/utils/data/blogs-data";
 import BlogCard from "../components/homepage/blog/blog-card";
 
 async function getBlogs() {
-  const res = await fetch(`https://dev.to/api/articles?username=${personalData.devUsername}`)
+  let devToBlogs = [];
 
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
+  try {
+    const res = await fetch(
+      `https://dev.to/api/articles?username=${personalData.devUsername}`,
+      { cache: 'no-store' },
+    )
+
+    if (res.ok) {
+      const data = await res.json();
+      devToBlogs = data.map((item) => ({ ...item, source: "devto" }));
+    }
+  } catch (error) {
+    // Dev.to API unavailable — continue with local blogs only
   }
 
-  const data = await res.json();
-  return data;
+  return [...devToBlogs, ...localBlogs];
 };
 
 async function page() {
@@ -32,8 +42,7 @@ async function page() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-5 lg:gap-8 xl:gap-10">
         {
           blogs.map((blog, i) => (
-            blog?.cover_image &&
-            <BlogCard blog={blog} key={i} />
+            <BlogCard blog={blog} index={i} key={i} />
           ))
         }
       </div>
