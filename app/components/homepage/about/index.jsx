@@ -1,11 +1,25 @@
 // @flow strict
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { personalData } from "@/utils/data/personal-data";
 
 function AboutSection() {
   const [isColor, setIsColor] = useState(false);
+  const [inViewport, setInViewport] = useState(false);
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    const isMobile = window.matchMedia("(hover: none)").matches;
+    if (!isMobile || !imgRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setInViewport(entry.isIntersecting),
+      { threshold: 0.5 }
+    );
+    observer.observe(imgRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div id="about" className="my-12 lg:my-16 relative">
@@ -36,10 +50,11 @@ function AboutSection() {
         </div>
         <div className="flex justify-center order-1 lg:order-2">
           <img
+            ref={imgRef}
             src={personalData.profile}
             alt="Vignesh Ambalam Suresh"
             className={`rounded-lg transition-all duration-1000 cursor-pointer ${
-              isColor ? "grayscale-0" : "grayscale hover:grayscale-0"
+              isColor || inViewport ? "grayscale-0" : "grayscale hover:grayscale-0"
             }`}
             onClick={() => setIsColor((prev) => !prev)}
           />
