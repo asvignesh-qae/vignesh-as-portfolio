@@ -1,6 +1,7 @@
 "use client";
 // @flow strict
 
+import { useState } from "react";
 import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +11,17 @@ import { RiContactsFill } from "react-icons/ri";
 import { SiLeetcode, SiCodewars } from "react-icons/si";
 import { TypeAnimation } from "react-type-animation";
 
+function getResumePreviewUrl(url) {
+  const match = url.match(/\/d\/([^/]+)/);
+  if (match) {
+    return `https://drive.google.com/file/d/${match[1]}/preview`;
+  }
+  return url;
+}
+
 function HeroSection() {
+  const [showResume, setShowResume] = useState(false);
+
   return (
     <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
       <Image
@@ -132,15 +143,13 @@ function HeroSection() {
               </button>
             </Link>
 
-            <Link
+            <button
               className="flex items-center gap-1 hover:gap-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-3 md:px-8 py-3 md:py-4 text-center text-xs md:text-sm font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out hover:text-white hover:no-underline md:font-semibold"
-              role="button"
-              target="_blank"
-              href={personalData.resume}
+              onClick={() => setShowResume(true)}
             >
               <span>Get Resume</span>
               <MdDownload size={16} />
-            </Link>
+            </button>
           </div>
         </div>
         <div className="order-1 lg:order-2 from-[#0d1224] border-[#1b2c68a0] relative rounded-lg border bg-gradient-to-r to-[#0a0d37]">
@@ -277,6 +286,44 @@ function HeroSection() {
           </div>
         </div>
       </div>
+
+      {showResume && (
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          onClick={() => setShowResume(false)}
+        >
+          <div
+            className="relative w-full max-w-4xl max-h-[90vh] flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="w-full flex justify-end gap-3 mb-3">
+              <a
+                href={personalData.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-4 py-2 text-sm font-medium text-white no-underline transition-all duration-200 ease-out hover:from-violet-600 hover:to-pink-500"
+              >
+                <MdDownload size={16} />
+                <span>Download</span>
+              </a>
+              <button
+                onClick={() => setShowResume(false)}
+                className="flex items-center gap-1 rounded-full bg-[#1a1443] px-4 py-2 text-sm font-medium text-white transition-colors duration-300 hover:bg-pink-600"
+              >
+                ✕ Close
+              </button>
+            </div>
+            <div className="w-full rounded-lg overflow-hidden" style={{ height: "80vh" }}>
+              <iframe
+                src={getResumePreviewUrl(personalData.resume)}
+                className="w-full h-full rounded-lg"
+                title="Resume Preview"
+                allow="autoplay"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
