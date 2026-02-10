@@ -7,7 +7,7 @@ export const experiences = [
     bullets: [
       "Designed a scalable Playwright automation framework, reducing test case duplication by 60% and improving long-term maintainability using Playwright + TypeScript.",
       "Spearheaded the creation of 11+ reusable Page Object Models, Service Object Models, fixtures and utilities, shortening release cycles by 15% while improving test automation maintainability.",
-      "Axe-core accessibility checks into the regression suite, ensuring WCAG compliance and improving inclusive user experience.",
+      "Integrated Axe-core accessibility checks into the regression suite, ensuring WCAG compliance and improving inclusive user experience.",
       "Owned the design and implementation of modular CI/CD automation pipelines using GitHub Actions, driving higher release confidence and cutting manual QA effort by 70%.",
       "Collaborated with developers, architects, and product owners to refine acceptance criteria and drive high-quality feature delivery in Agile/Scrum teams.",
       "Utilized tools including Git, GitHub, Jira, TestRail, Confluence, AWS, Azure, and Docker (where applicable) to support automation, version control, and CI/CD workflows.",
@@ -25,7 +25,7 @@ export const experiences = [
     bullets: [
       "Led end-to-end automation initiatives and mentored junior QA engineers, improving team productivity, code quality, and automation adoption.",
       "Implemented BDD-based API automation using Cucumber feature files and an enhanced Rest Assured framework to validate RESTful APIs and service responses.",
-      "Cucumber BDD into an existing Selenium/TestNG framework, improving test readability, maintainability, and stakeholder collaboration.",
+      "Introduced Cucumber BDD into an existing Selenium/TestNG framework, improving test readability, maintainability, and stakeholder collaboration.",
       "Enhanced and refactored Selenium automation by introducing reusable WebDriver wrapper utilities which reduced flakiness and maintenance effort by 70%.",
       "Managed source control, branching strategies, and pull requests using Git and Bitbucket, supporting stable CI workflows.",
       "Introduced shared JavaScript utilities and reusable feature files to standardize API and UI automation and reduce duplication.",
