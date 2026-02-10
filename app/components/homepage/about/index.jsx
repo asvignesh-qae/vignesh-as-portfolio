@@ -1,8 +1,12 @@
 // @flow strict
+"use client";
 
+import { useState } from "react";
 import { personalData } from "@/utils/data/personal-data";
 
 function AboutSection() {
+  const [isColor, setIsColor] = useState(false);
+
   return (
     <div id="about" className="my-12 lg:my-16 relative">
       <div className="hidden lg:flex flex-col items-center absolute top-16 -right-8">
@@ -34,7 +38,10 @@ function AboutSection() {
           <img
             src={personalData.profile}
             alt="Vignesh Ambalam Suresh"
-            className="rounded-lg transition-all duration-1000 grayscale hover:grayscale-0 cursor-pointer"
+            className={`rounded-lg transition-all duration-1000 cursor-pointer ${
+              isColor ? "grayscale-0" : "grayscale hover:grayscale-0"
+            }`}
+            onClick={() => setIsColor((prev) => !prev)}
           />
         </div>
       </div>
