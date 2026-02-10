@@ -3,12 +3,14 @@
   "description": "Portfolio of Vignesh Ambalam Suresh",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@7.5.1",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
+  
   "dependencies": {
     "@emailjs/browser": "^4.3.1",
     "@next/third-parties": "^16.0.1",
