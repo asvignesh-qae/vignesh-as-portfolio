@@ -323,7 +323,7 @@ profile: "/your-image-name.png"; // or .jpg, .webp
 
 ### 🚀 Deploy to Vercel (Recommended)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/said7388/developer-portfolio)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/asvignesh-qae/vignesh-as-portfolio)
 
 **Manual Deployment:**
 
@@ -344,7 +344,7 @@ profile: "/your-image-name.png"; // or .jpg, .webp
 
 ### 🌐 Deploy to Netlify
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/said7388/developer-portfolio)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/asvignesh-qae/vignesh-as-portfolio)
 
 **Manual Deployment:**
 
@@ -575,13 +575,13 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ## Support :coffee:
 
-- ⭐ [Star the repository](https://github.com/said7388/developer-portfolio/stargazers)
-- � [Report bugs](https://github.com/said7388/developer-portfolio/issues)
-- � [Suggest features](https://github.com/said7388/developer-portfolio/discussions)
+- ⭐ [Star the repository](https://github.com/asvignesh-qae/vignesh-as-portfolio/stargazers)
+- 🐛 [Report bugs](https://github.com/asvignesh-qae/vignesh-as-portfolio/issues)
+- 💡 [Suggest features](https://github.com/asvignesh-qae/vignesh-as-portfolio/discussions)
 
 ---
 
-![GitHub stars](https://img.shields.io/github/stars/said7388/developer-portfolio?style=social)
-![GitHub forks](https://img.shields.io/github/forks/said7388/developer-portfolio?style=social)
-![GitHub issues](https://img.shields.io/github/issues/said7388/developer-portfolio)
-![GitHub license](https://img.shields.io/github/license/said7388/developer-portfolio)
+![GitHub stars](https://img.shields.io/github/stars/asvignesh-qae/vignesh-as-portfolio?style=social)
+![GitHub forks](https://img.shields.io/github/forks/asvignesh-qae/vignesh-as-portfolio?style=social)
+![GitHub issues](https://img.shields.io/github/issues/asvignesh-qae/vignesh-as-portfolio)
+![GitHub license](https://img.shields.io/github/license/asvignesh-qae/vignesh-as-portfolio)
