@@ -3,7 +3,7 @@
   "description": "Portfolio of Vignesh Ambalam Suresh",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@7.5.1",
+  "packageManager": "pnpm@10.6.2",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
