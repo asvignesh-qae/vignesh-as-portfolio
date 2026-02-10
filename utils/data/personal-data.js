@@ -3,11 +3,13 @@ export const personalData = {
   profile: "/profile-vignesh-final.jpeg",
   designation: "Senior Software Test Automation Engineer / SDET",
   description: [
-    `Experienced Senior Software Test Automation Engineer / SDET with a strong background in designing and implementing robust test automation frameworks
-    Proficient in Playwright, TypeScript, Selenium WebDriver, and CI/CD integration
-    Skilled in automating complex end-to-end UI and API workflows, enhancing software quality, and accelerating release cycles
-    Passionate about continuous learning and staying updated with the latest testing tools
-    Frequently lead automation design and execution across Agile, multi-team environments in Europe.`,
+    `Experienced Senior Software Test Automation Engineer / SDET with a strong background in designing and implementing robust test automation frameworks`,
+    `Proficient in Playwright, TypeScript, Selenium WebDriver, and CI/CD integration`,
+    `Skilled in automating complex end-to-end UI and API workflows, enhancing software quality, and accelerating release cycles`,
+    `Passionate about continuous learning and staying updated with the latest testing tools`,
+    `Frequently lead automation design and execution across Agile, multi-team environments in Europe.`,
+  ],
+  whatIBring: [
     "🌍 Based in Budapest, with Hungarian Permanent Residency — no visa sponsorship needed, available to work anywhere in the EU immediately.",
     "♿ Accessibility-First Tester — hands-on experience implementing WCAG compliance using axe-core, with a 30% measurable improvement in accessibility scores on production applications.",
     "🤖 AI-Augmented QA — actively integrating AI tools and MCP agents into test automation workflows, bridging traditional QA with the next generation of intelligent testing.",

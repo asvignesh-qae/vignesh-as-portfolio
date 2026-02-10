@@ -1,7 +1,6 @@
 // @flow strict
 
 import { personalData } from "@/utils/data/personal-data";
-import Image from "next/image";
 
 function AboutSection() {
   return (
@@ -22,12 +21,18 @@ function AboutSection() {
               <li key={index}>{point}</li>
             ))}
           </ul>
+          <p className="font-medium mt-8 mb-5 text-[#16f2b3] text-xl uppercase">
+            What I bring
+          </p>
+          <ul className="text-gray-200 text-sm lg:text-lg list-none space-y-3">
+            {personalData.whatIBring.map((point, index) => (
+              <li key={index}>{point}</li>
+            ))}
+          </ul>
         </div>
         <div className="flex justify-center order-1 lg:order-2">
-          <Image
+          <img
             src={personalData.profile}
-            width={280}
-            height={280}
             alt="Vignesh Ambalam Suresh"
             className="rounded-lg transition-all duration-1000 grayscale hover:grayscale-0 cursor-pointer"
           />
