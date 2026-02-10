@@ -16,13 +16,13 @@ function AboutSection() {
           <p className="font-medium mb-5 text-[#16f2b3] text-xl uppercase">
             Who I am?
           </p>
-          <ul className="text-gray-200 text-sm lg:text-lg list-disc list-inside space-y-2">
+          <div className="text-gray-200 text-sm lg:text-lg space-y-2">
             {personalData.description.map((point, index) => (
-              <li key={index}>{point}</li>
+              <p key={index}>{point}</p>
             ))}
-          </ul>
+          </div>
           <p className="font-medium mt-8 mb-5 text-[#16f2b3] text-xl uppercase">
-            What I bring
+            What I bring?
           </p>
           <ul className="text-gray-200 text-sm lg:text-lg list-none space-y-3">
             {personalData.whatIBring.map((point, index) => (
