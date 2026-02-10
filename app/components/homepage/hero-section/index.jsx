@@ -271,7 +271,7 @@ function HeroSection() {
                 <span className="ml-12 lg:ml-24 text-cyan-400">this.</span>
                 <span className="mr-2 text-white">frameworks.length</span>
                 <span className="mr-2 text-amber-300">&gt;</span>
-                <span className="text-orange-400">3</span>
+                <span className="text-orange-400">7</span>
               </div>
               <div>
                 <span className="ml-8 lg:ml-16 mr-2 text-gray-400">{`);`}</span>

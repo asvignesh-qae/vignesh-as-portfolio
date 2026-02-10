@@ -14,7 +14,7 @@ export const projectsData = [
     id: 2,
     name: "Sauce Labs - Cross Browser Testing",
     description:
-      "Designed and executed a robust cross-browser testing strategy for a web application using Selenium WebDriver with Java, ensuring compatibility across multiple browsers and platforms. Developed automated test scripts to validate critical user workflows and integrated them into the CI/CD pipeline for continuous testing. Collaborated with development teams to identify and resolve cross-browser issues, resulting in improved application stability and user experience across diverse environments.",
+      "Designed and executed a robust cross-browser testing strategy for a web application using Playwright with TypeScript, ensuring compatibility across multiple browsers and platforms. Developed automated test scripts to validate critical user workflows and integrated them into the CI/CD pipeline for continuous testing. Collaborated with development teams to identify and resolve cross-browser issues, resulting in improved application stability and user experience across diverse environments.",
     tools: ["Playwright", "TypeScript", "Jira", "GitHub Actions"],
     role: "Senior Software Test Automation Engineer / SDET",
     code: "https://github.com/asvignesh-qae/SauceDemo-Automation/tree/main?tab=readme-ov-file#saucedemo-automation-framework",

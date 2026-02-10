@@ -8,7 +8,7 @@ export const experiences = [
   {
     id: 2,
     title: "Associate",
-    company: "Cogniznt Technology Solutions",
+    company: "Cognizant Technology Solutions",
     duration: "(May 2016 - July 2021)",
   },
 ];

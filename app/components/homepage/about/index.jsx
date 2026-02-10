@@ -17,9 +17,11 @@ function AboutSection() {
           <p className="font-medium mb-5 text-[#16f2b3] text-xl uppercase">
             Who I am?
           </p>
-          <p className="text-gray-200 text-sm lg:text-lg">
-            {personalData.description}
-          </p>
+          <ul className="text-gray-200 text-sm lg:text-lg list-disc list-inside space-y-2">
+            {personalData.description.map((point, index) => (
+              <li key={index}>{point}</li>
+            ))}
+          </ul>
         </div>
         <div className="flex justify-center order-1 lg:order-2">
           <Image
@@ -27,7 +29,7 @@ function AboutSection() {
             width={280}
             height={280}
             alt="Vignesh Ambalam Suresh"
-            className="rounded-lg transition-all duration-1000 grayscale hover:grayscale-0 hover:scale-110 cursor-pointer"
+            className="rounded-lg transition-all duration-1000 grayscale hover:grayscale-0 cursor-pointer"
           />
         </div>
       </div>

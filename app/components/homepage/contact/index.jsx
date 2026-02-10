@@ -33,7 +33,15 @@ function ContactSection() {
                 className="bg-[#8b98a5] p-2 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
                 size={36}
               />
-              <span>{personalData.phone}</span>
+              <span className="flex items-center gap-2 flex-wrap">
+                {personalData.phones.map((p, i) => (
+                  <span key={i} className="flex items-center gap-1">
+                    {i > 0 && <span className="mx-1">/</span>}
+                    <img src={p.flag} alt="" width={20} height={14} className="inline-block" />
+                    {p.number}
+                  </span>
+                ))}
+              </span>
             </p>
             <p className="text-sm md:text-xl flex items-center gap-3">
               <CiLocationOn
