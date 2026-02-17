@@ -2,8 +2,10 @@
 
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { FaTimes } from 'react-icons/fa';
 import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 function toRawGitHubUrl(url) {
   // Convert https://github.com/user/repo/blob/branch/path
@@ -88,7 +90,7 @@ function ProjectCard({ project }) {
         </p>
       </div>
 
-      {previewUrl && (
+      {previewUrl && createPortal(
         <div
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-3 sm:p-5"
           onClick={() => setPreviewUrl(null)}
@@ -137,12 +139,13 @@ function ProjectCard({ project }) {
               )}
               {markdown && (
                 <div className="github-markdown">
-                  <Markdown>{markdown}</Markdown>
+                  <Markdown remarkPlugins={[remarkGfm]}>{markdown}</Markdown>
                 </div>
               )}
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       <div className="overflow-hidden border-t-[2px] border-indigo-900 px-4 lg:px-8 py-4 lg:py-8">
