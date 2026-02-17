@@ -12,14 +12,32 @@ export const projectsData = [
   },
   {
     id: 2,
-    name: "Sauce Labs - Cross Browser Testing",
+    name: "Playwright with TypeScript - Cross Browser Testing",
     description:
       "Designed and executed a robust cross-browser testing strategy for a web application using Playwright with TypeScript, ensuring compatibility across multiple browsers and platforms. Developed automated test scripts to validate critical user workflows and integrated them into the CI/CD pipeline for continuous testing. Collaborated with development teams to identify and resolve cross-browser issues, resulting in improved application stability and user experience across diverse environments.",
     tools: ["Playwright", "TypeScript", "Jira", "GitHub Actions"],
     role: "Senior Software Test Automation Engineer / SDET",
-    code: "https://github.com/asvignesh-qae/SauceDemo-Automation/tree/main?tab=readme-ov-file#saucedemo-automation-framework",
+    code: "https://github.com/asvignesh-qae/SauceDemo-Automation/blob/main/README.md",
     demo: "",
     impact: ``,
+  },
+  {
+    id: 3,
+    name: "Selenium with Java - Hybrid Test Automation Framework",
+    description:
+      "Architected a Hybrid Test Automation Framework using Selenium 4 with Java 17, combining Page Object Model (POM), Data-Driven Testing, and BDD (Cucumber) approaches into a unified, enterprise-grade solution. Implemented thread-safe parallel execution using ThreadLocal for concurrent test runs, dual test runners (TestNG + Cucumber), and REST Assured for API validation. Integrated Allure reporting with automatic screenshot capture on failures and configured GitHub Actions CI/CD pipelines for automated test execution on every push with self-contained report artifacts.",
+    tools: [
+      "Selenium",
+      "Java",
+      "TestNG",
+      "Maven",
+      "Rest-Assured",
+      "GitHub Actions",
+    ],
+    role: "Senior Software Test Automation Engineer / SDET",
+    code: "https://github.com/asvignesh-qae/Genesys-Demo/blob/main/README.md",
+    demo: "",
+    impact: `.`,
   },
 ];
 
