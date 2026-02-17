@@ -37,7 +37,7 @@ export const projectsData = [
     role: "Senior Software Test Automation Engineer / SDET",
     code: "https://github.com/asvignesh-qae/Genesys-Demo/blob/main/README.md",
     demo: "",
-    impact: `.`,
+    impact: ``,
   },
 ];
 
