@@ -21,7 +21,8 @@ async function getBlogs() {
     // Dev.to API unavailable — continue with local blogs only
   }
 
-  return [...devToBlogs, ...localBlogs];
+  return [...devToBlogs, ...localBlogs]
+    .filter((blog, index, self) => index === self.findIndex(b => b.url === blog.url));
 };
 
 async function page() {

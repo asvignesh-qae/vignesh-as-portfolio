@@ -28,6 +28,7 @@ async function getData() {
   }
 
   const allBlogs = [...devToBlogs, ...localBlogs]
+    .filter((blog, index, self) => index === self.findIndex(b => b.url === blog.url))
     .sort(() => Math.random() - 0.5);
 
   return allBlogs;
