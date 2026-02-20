@@ -15,7 +15,9 @@ html {
   overflow-x: hidden;
 }
 
-nav a:focus {
+nav a[href]:focus,
+nav a[href]:focus-visible {
+  --tw-outline-style: solid;
   outline: 2px solid #16f2b3;
   outline-offset: 2px;
 }

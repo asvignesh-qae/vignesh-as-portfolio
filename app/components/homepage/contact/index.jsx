@@ -11,8 +11,9 @@ import ContactForm from "./contact-form";
 function ContactSection() {
   return (
     <div id="contact" className="my-12 lg:my-16 relative mt-24 text-white">
+      <h2 className="sr-only">Contact</h2>
       <div className="hidden lg:flex flex-col items-center absolute top-24 -right-8">
-        <span className="bg-[#1a1443] w-fit text-white rotate-90 p-2 px-5 text-xl rounded-md">
+        <span className="bg-[#1a1443] w-fit text-white rotate-90 p-2 px-5 text-xl rounded-md" aria-hidden="true">
           CONTACT
         </span>
         <span className="h-36 w-[2px] bg-[#1a1443]"></span>
@@ -40,7 +41,9 @@ function ContactSection() {
                   <span key={i} className="flex items-center gap-1">
                     {i > 0 && <span className="mx-1">/</span>}
                     <img src={p.flag} alt={`${p.country} flag`} width={20} height={14} className="inline-block" />
-                    {p.number}
+                    <a href={`tel:${p.number.replace(/\s/g, '')}`} className="hover:text-[#16f2b3] transition-colors duration-300">
+                      {p.number}
+                    </a>
                   </span>
                 ))}
               </span>

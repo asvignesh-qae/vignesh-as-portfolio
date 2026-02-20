@@ -17,7 +17,7 @@ function BlogCard({ blog, index }) {
               src={blog.cover_image}
               height={1080}
               width={1920}
-              alt=""
+              alt={blog.title}
               className='h-full w-full group-hover:scale-110 transition-all duration-300'
             />
           </div>
