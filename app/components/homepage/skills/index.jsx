@@ -7,7 +7,7 @@ import Marquee from "react-fast-marquee";
 
 function Skills() {
   return (
-    <div id="skills" className="relative z-50 border-t my-12 lg:my-24 border-[#25213b]">
+    <div id="skills" className="relative z-50 border-t my-12 lg:my-24 border-[#25213b] overflow-x-hidden">
       <div className="w-[100px] h-[100px] bg-violet-100 rounded-full absolute top-6 left-[42%] translate-x-1/2 filter blur-3xl  opacity-20"></div>
 
       <div className="flex justify-center -translate-y-[1px]">
@@ -27,7 +27,19 @@ function Skills() {
       </div>
 
       <div className="w-full my-12" role="region" aria-label="Skills carousel">
-        <Marquee
+        <ul className="sr-only">
+          {skillsData.map((skill, id) => {
+            const image = skillsImage(skill);
+            if (!image) return null;
+            return (
+              <li key={id}>
+                <Image src={image} alt={`${skill} logo`} width={40} height={40} />
+                <span>{skill}</span>
+              </li>
+            );
+          })}
+        </ul>
+        <Marquee aria-hidden="true"
           gradient={false}
           speed={80}
           pauseOnHover={true}

@@ -6,7 +6,7 @@ function Navbar() {
     <nav className="bg-transparent" aria-label="Main navigation">
       <div className="flex items-center justify-between py-5">
         <div className="flex flex-shrink-0 items-center">
-          <Link href="/" className=" text-[#16f2b3] text-3xl font-bold" aria-label="Vignesh Ambalam Suresh - Home">
+          <Link href="/" className=" text-[#16f2b3] text-3xl font-bold rounded focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#16f2b3]" aria-label="Vignesh Ambalam Suresh - Home">
             VIGNESH AMBALAM SURESH
           </Link>
         </div>
@@ -17,7 +17,7 @@ function Navbar() {
         >
           <li>
             <Link
-              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#16f2b3] rounded"
+              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#16f2b3] rounded"
               href="/#about"
             >
               ABOUT
@@ -25,7 +25,7 @@ function Navbar() {
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#16f2b3] rounded"
+              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#16f2b3] rounded"
               href="/#experience"
             >
               EXPERIENCE
@@ -33,7 +33,7 @@ function Navbar() {
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#16f2b3] rounded"
+              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#16f2b3] rounded"
               href="/#skills"
             >
               SKILLS
@@ -41,7 +41,7 @@ function Navbar() {
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#16f2b3] rounded"
+              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#16f2b3] rounded"
               href="/#education"
             >
               EDUCATION
@@ -49,7 +49,7 @@ function Navbar() {
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#16f2b3] rounded"
+              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#16f2b3] rounded"
               href="/#certifications"
             >
               CERTIFICATIONS
@@ -57,7 +57,7 @@ function Navbar() {
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#16f2b3] rounded"
+              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#16f2b3] rounded"
               href="/#blogs"
             >
               BLOGS
@@ -65,7 +65,7 @@ function Navbar() {
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#16f2b3] rounded"
+              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#16f2b3] rounded"
               href="/#projects"
             >
               PROJECTS
@@ -73,7 +73,7 @@ function Navbar() {
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#16f2b3] rounded"
+              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#16f2b3] rounded"
               href="/#contact"
             >
               CONTACT VIGNESH
