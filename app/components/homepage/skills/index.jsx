@@ -26,7 +26,7 @@ function Skills() {
         </div>
       </div>
 
-      <div className="w-full my-12">
+      <div className="w-full my-12" role="region" aria-label="Skills carousel">
         <Marquee
           gradient={false}
           speed={80}
@@ -53,7 +53,7 @@ function Skills() {
                     <div className="h-8 sm:h-10">
                       <Image
                         src={image}
-                        alt={skill}
+                        alt={`${skill} logo`}
                         width={40}
                         height={40}
                         className="h-full w-auto rounded-lg"

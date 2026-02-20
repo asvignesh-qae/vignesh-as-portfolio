@@ -1,10 +1,9 @@
 "use client";
 
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { FaTimes } from 'react-icons/fa';
-import { FaChartBar } from 'react-icons/fa';
+import { FaTimes, FaChartBar, FaUniversalAccess } from 'react-icons/fa';
 import { BsCircleFill } from 'react-icons/bs';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -26,6 +25,8 @@ function ProjectCard({ project }) {
   const [markdown, setMarkdown] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const triggerRef = useRef(null);
+  const closeButtonRef = useRef(null);
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -37,6 +38,26 @@ function ProjectCard({ project }) {
     return () => {
       document.body.style.overflow = '';
     };
+  }, [previewUrl]);
+
+  // Focus close button when modal opens
+  useEffect(() => {
+    if (previewUrl) {
+      closeButtonRef.current?.focus();
+    }
+  }, [previewUrl]);
+
+  // Close modal on Escape key and return focus to trigger
+  useEffect(() => {
+    if (!previewUrl) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setPreviewUrl(null);
+        setTimeout(() => triggerRef.current?.focus(), 0);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, [previewUrl]);
 
   useEffect(() => {
@@ -75,55 +96,74 @@ function ProjectCard({ project }) {
     setPreviewUrl(url);
   };
 
+  const handleCloseModal = () => {
+    setPreviewUrl(null);
+    setTimeout(() => triggerRef.current?.focus(), 0);
+  };
+
   return (
     <div className="from-[#0d1224] border-[#1b2c68a0] relative rounded-lg border bg-gradient-to-r to-[#0a0d37] w-full">
-      <div className="flex flex-row">
+      <div className="flex flex-row" aria-hidden="true">
         <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-pink-500 to-violet-600"></div>
         <div className="h-[1px] w-full bg-gradient-to-r from-violet-600 to-transparent"></div>
       </div>
       <div className="flex items-center gap-3 px-4 lg:px-8 py-3 lg:py-5">
-        <div className="flex flex-row space-x-1 lg:space-x-2 flex-shrink-0">
+        <div className="flex flex-row space-x-1 lg:space-x-2 flex-shrink-0" aria-hidden="true">
           <div className="h-2 w-2 lg:h-3 lg:w-3 rounded-full bg-red-400"></div>
           <div className="h-2 w-2 lg:h-3 lg:w-3 rounded-full bg-orange-400"></div>
           <div className="h-2 w-2 lg:h-3 lg:w-3 rounded-full bg-green-200"></div>
         </div>
-        <p className="text-center flex-1 text-[#16f2b3] text-base lg:text-xl">
-          {project.name}
-        </p>
+        <div className="flex flex-col items-center flex-1 gap-1">
+          <p className="text-center text-[#16f2b3] text-base lg:text-xl">
+            {project.name}
+          </p>
+          {project.tools.some(t => t.toLowerCase() === 'axe-core') && (
+            <span className="inline-flex items-center gap-1 text-xs bg-green-900/40 border border-green-500/40 text-green-400 rounded-full px-2.5 py-0.5">
+              <FaUniversalAccess size={11} aria-hidden="true" />
+              Accessibility Passed
+            </span>
+          )}
+        </div>
       </div>
 
       {previewUrl && createPortal(
         <div
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-3 sm:p-5"
-          onClick={() => setPreviewUrl(null)}
+          onClick={handleCloseModal}
         >
           <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="readme-modal-title"
             className="relative w-full max-w-6xl max-h-[92vh] bg-[#0d1117] rounded-xl border border-[#30363d] shadow-2xl flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close button */}
             <button
-              onClick={() => setPreviewUrl(null)}
+              ref={closeButtonRef}
+              onClick={handleCloseModal}
               className="absolute -top-3 -right-3 z-10 flex items-center justify-center w-9 h-9 rounded-full bg-[#21262d] border border-[#30363d] text-[#8b949e] hover:text-white hover:bg-[#30363d] transition-all duration-200 shadow-lg"
-              title="Close preview"
+              aria-label="Close README preview"
             >
-              <FaTimes size={16} />
+              <FaTimes size={16} aria-hidden="true" />
             </button>
 
             {/* Header bar */}
             <div className="flex items-center gap-2 px-4 lg:px-6 py-3 bg-[#161b22] border-b border-[#30363d] rounded-t-xl flex-shrink-0">
-              <svg className="w-4 h-4 text-[#8b949e] flex-shrink-0" fill="currentColor" viewBox="0 0 16 16">
+              <svg className="w-4 h-4 text-[#8b949e] flex-shrink-0" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
                 <path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 9 4.25V1.5Zm6.75.062V4.25c0 .138.112.25.25.25h2.688l-.011-.013-2.914-2.914-.013-.011Z"/>
               </svg>
               <a
+                id="readme-modal-title"
                 href={previewUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-[#58a6ff] hover:underline truncate"
+                aria-label={`View README.md for ${previewUrl.split('/').slice(3, 5).join('/')} on GitHub (opens in new tab)`}
               >
                 README.md
               </a>
-              <span className="text-xs text-[#8b949e] hidden sm:inline">
+              <span className="text-xs text-[#8b949e] hidden sm:inline" aria-hidden="true">
                 — {previewUrl.split('/').slice(3, 5).join('/')}
               </span>
             </div>
@@ -131,13 +171,13 @@ function ProjectCard({ project }) {
             {/* Content */}
             <div className="overflow-y-auto px-6 lg:px-10 py-6 flex-1">
               {loading && (
-                <div className="flex items-center gap-3 py-12 justify-center">
-                  <div className="w-5 h-5 border-2 border-[#58a6ff] border-t-transparent rounded-full animate-spin"></div>
+                <div className="flex items-center gap-3 py-12 justify-center" role="status" aria-live="polite">
+                  <div className="w-5 h-5 border-2 border-[#58a6ff] border-t-transparent rounded-full animate-spin" aria-hidden="true"></div>
                   <p className="text-[#8b949e] text-sm">Loading preview...</p>
                 </div>
               )}
               {error && (
-                <p className="text-red-400 text-sm">{error}</p>
+                <p className="text-red-400 text-sm" role="alert">{error}</p>
               )}
               {markdown && (
                 <div className="github-markdown">
@@ -151,7 +191,7 @@ function ProjectCard({ project }) {
       )}
 
       <div className="overflow-hidden border-t-[2px] border-indigo-900 px-4 lg:px-8 py-4 lg:py-8">
-          <code className="font-mono text-xs md:text-sm lg:text-base">
+          <code className="font-mono text-xs md:text-sm lg:text-base" aria-hidden="true">
             <div className="blink">
               <span className="mr-2 text-pink-500">const</span>
               <span className="mr-2 text-white">project</span>
@@ -203,9 +243,11 @@ function ProjectCard({ project }) {
                 <span className="text-white">code:</span>
                 <span className="text-gray-400">{` '`}</span>
                 <a
+                  ref={!project.demo ? triggerRef : undefined}
                   href={project.code}
                   onClick={(e) => handleLinkClick(e, project.code)}
                   className="text-amber-300 underline hover:text-[#16f2b3] cursor-pointer"
+                  aria-label={`View source code for ${project.name} (opens README preview)`}
                 >
                   {project.code}
                 </a>
@@ -217,9 +259,11 @@ function ProjectCard({ project }) {
                 <span className="text-white">demo:</span>
                 <span className="text-gray-400">{` '`}</span>
                 <a
+                  ref={triggerRef}
                   href={project.demo}
                   onClick={(e) => handleLinkClick(e, project.demo)}
                   className="text-amber-300 underline hover:text-[#16f2b3] cursor-pointer"
+                  aria-label={`View demo for ${project.name} (opens README preview)`}
                 >
                   {project.demo}
                 </a>
@@ -259,14 +303,15 @@ function ProjectCard({ project }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2.5 px-4 py-2 rounded-lg bg-[#16f2b3]/10 border border-[#16f2b3]/30 text-[#16f2b3] text-sm font-medium hover:bg-[#16f2b3]/20 hover:border-[#16f2b3]/60 transition-all duration-200 group"
+                  aria-label={`View live report: ${report.label} for ${project.name} (opens in new tab)`}
                 >
-                  <span className="relative flex h-2.5 w-2.5 flex-shrink-0">
+                  <span className="relative flex h-2.5 w-2.5 flex-shrink-0" aria-hidden="true">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#16f2b3] opacity-75"></span>
                     <BsCircleFill className="relative inline-flex text-[#16f2b3]" size={10} />
                   </span>
-                  <FaChartBar size={13} />
+                  <FaChartBar size={13} aria-hidden="true" />
                   <span>{report.label}</span>
-                  <svg className="w-3.5 h-3.5 opacity-60 group-hover:translate-x-0.5 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3.5 h-3.5 opacity-60 group-hover:translate-x-0.5 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
                 </a>

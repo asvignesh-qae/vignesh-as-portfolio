@@ -15,7 +15,7 @@ const AnimationLottie = ({ animationPath, width }) => {
   };
 
   return (
-    <Lottie {...defaultOptions} />
+    <Lottie {...defaultOptions} aria-hidden="true" role="presentation" />
   );
 };
 

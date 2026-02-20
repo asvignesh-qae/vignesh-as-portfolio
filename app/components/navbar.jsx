@@ -3,10 +3,10 @@ import Link from "next/link";
 
 function Navbar() {
   return (
-    <nav className="bg-transparent">
+    <nav className="bg-transparent" aria-label="Main navigation">
       <div className="flex items-center justify-between py-5">
         <div className="flex flex-shrink-0 items-center">
-          <Link href="/" className=" text-[#16f2b3] text-3xl font-bold">
+          <Link href="/" className=" text-[#16f2b3] text-3xl font-bold" aria-label="Vignesh Ambalam Suresh - Home">
             VIGNESH AMBALAM SURESH
           </Link>
         </div>
@@ -17,82 +17,66 @@ function Navbar() {
         >
           <li>
             <Link
-              className="block px-4 py-2 no-underline outline-none hover:no-underline"
+              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#16f2b3] rounded"
               href="/#about"
             >
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
-                ABOUT
-              </div>
+              ABOUT
             </Link>
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline outline-none hover:no-underline"
+              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#16f2b3] rounded"
               href="/#experience"
             >
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
-                EXPERIENCE
-              </div>
+              EXPERIENCE
             </Link>
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline outline-none hover:no-underline"
+              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#16f2b3] rounded"
               href="/#skills"
             >
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
-                SKILLS
-              </div>
+              SKILLS
             </Link>
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline outline-none hover:no-underline"
+              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#16f2b3] rounded"
               href="/#education"
             >
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
-                EDUCATION
-              </div>
+              EDUCATION
             </Link>
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline outline-none hover:no-underline"
+              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#16f2b3] rounded"
               href="/#certifications"
             >
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
-                CERTIFICATIONS
-              </div>
+              CERTIFICATIONS
             </Link>
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline outline-none hover:no-underline"
+              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#16f2b3] rounded"
               href="/#blogs"
             >
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
-                BLOGS
-              </div>
+              BLOGS
             </Link>
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline outline-none hover:no-underline"
+              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#16f2b3] rounded"
               href="/#projects"
             >
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
-                PROJECTS
-              </div>
+              PROJECTS
             </Link>
           </li>
           <li>
             <Link
-              className="block px-4 py-2 no-underline outline-none hover:no-underline"
+              className="block px-4 py-2 no-underline hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#16f2b3] rounded"
               href="/#contact"
             >
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
-                CONTACT VIGNESH
-              </div>
+              CONTACT VIGNESH
             </Link>
           </li>
         </ul>

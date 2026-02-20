@@ -20,7 +20,7 @@ function Experience() {
     <div id="experience" className="relative z-50 border-t my-12 lg:my-24 border-[#25213b]">
       <Image
         src="/section.svg"
-        alt="Hero"
+        alt=""
         width={1572}
         height={795}
         className="absolute top-0 -z-10"
@@ -49,13 +49,15 @@ function Experience() {
               {
                 experiences.map(exp => (
                   <GlowCard key={exp.id} identifier={`experience-${exp.id}`}>
-                    <div
-                      className="p-3 relative cursor-pointer"
+                    <button
+                      className="p-3 relative w-full text-left cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#16f2b3] rounded-t-lg"
                       onClick={() => handleToggle(exp.id)}
+                      aria-expanded={expandedId === exp.id}
+                      aria-controls={`exp-details-${exp.id}`}
                     >
                       <Image
                         src="/blur-23.svg"
-                        alt="Hero"
+                        alt=""
                         width={1080}
                         height={200}
                         className="absolute bottom-0 opacity-80"
@@ -66,7 +68,7 @@ function Experience() {
                         </p>
                       </div>
                       <div className="flex items-center gap-x-8 px-3 py-5">
-                        <div className="text-violet-500  transition-all duration-300 hover:scale-125">
+                        <div className="text-violet-500  transition-all duration-300 hover:scale-125" aria-hidden="true">
                           <BsPersonWorkspace size={36} />
                         </div>
                         <div>
@@ -77,7 +79,7 @@ function Experience() {
                             {exp.company}
                           </p>
                         </div>
-                        <div className="ml-auto text-violet-500 transition-transform duration-300">
+                        <div className="ml-auto text-violet-500 transition-transform duration-300" aria-hidden="true">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20"
@@ -94,8 +96,9 @@ function Experience() {
                           </svg>
                         </div>
                       </div>
-                    </div>
+                    </button>
                     <div
+                      id={`exp-details-${exp.id}`}
                       className={`overflow-hidden transition-all duration-500 ease-in-out ${
                         expandedId === exp.id ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
                       }`}
@@ -107,7 +110,7 @@ function Experience() {
                               key={index}
                               className="text-sm sm:text-base text-gray-300 flex items-start gap-2"
                             >
-                              <span className="text-[#16f2b3] mt-1.5 min-w-[6px]">&#8226;</span>
+                              <span className="text-[#16f2b3] mt-1.5 min-w-[6px]" aria-hidden="true">&#8226;</span>
                               <span>{bullet}</span>
                             </li>
                           ))}

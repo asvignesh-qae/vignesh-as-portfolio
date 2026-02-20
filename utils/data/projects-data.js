@@ -4,7 +4,7 @@ export const projectsData = [
     name: "Wealth Management Application",
     description:
       "Led the design and implementation of a comprehensive Test Automation Framework for a complex wealth management application, utilizing Playwright with TypeScript to automate end-to-end UI and API workflows. Integrated the automation suite into GitHub Actions for continuous testing in CI/CD pipelines, enabling early detection of defects and ensuring high-quality releases. Implemented accessibility testing using axe-core, resulting in improved compliance with WCAG standards and enhanced user experience for all users",
-    tools: ["Playwright", "TypeScript", "Jira", "GitHub Actions", "axe-core"],
+    tools: ["Playwright", "TypeScript", "Jira", "GitHub Actions"],
     role: "Senior Software Test Automation Engineer / SDET",
     code: "",
     demo: "",
@@ -16,7 +16,7 @@ export const projectsData = [
     name: "Playwright with TypeScript - Cross Browser Testing",
     description:
       "Designed and executed a robust cross-browser testing strategy for a web application using Playwright with TypeScript, ensuring compatibility across multiple browsers and platforms. Developed automated test scripts to validate critical user workflows and integrated them into the CI/CD pipeline for continuous testing. Collaborated with development teams to identify and resolve cross-browser issues, resulting in improved application stability and user experience across diverse environments.",
-    tools: ["Playwright", "TypeScript", "Jira", "GitHub Actions"],
+    tools: ["Playwright", "TypeScript", "Jira", "GitHub Actions", "axe-core"],
     role: "Senior Software Test Automation Engineer / SDET",
     code: "https://github.com/asvignesh-qae/SauceDemo-Automation/blob/main/README.md",
     demo: "",

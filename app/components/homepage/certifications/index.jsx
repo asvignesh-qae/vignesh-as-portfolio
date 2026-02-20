@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { certifications } from "@/utils/data/certifications";
 import Image from "next/image";
 import { BsPatchCheckFill } from "react-icons/bs";
@@ -7,6 +7,35 @@ import GlowCard from "../../helper/glow-card";
 
 function Certifications() {
   const [previewImage, setPreviewImage] = useState(null);
+  const closeButtonRef = useRef(null);
+  const triggerRefs = useRef({});
+
+  // Focus close button when modal opens
+  useEffect(() => {
+    if (previewImage) {
+      closeButtonRef.current?.focus();
+    }
+  }, [previewImage]);
+
+  // Close on Escape key and return focus to trigger
+  useEffect(() => {
+    if (!previewImage) return;
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        const id = previewImage.id;
+        setPreviewImage(null);
+        setTimeout(() => triggerRefs.current[id]?.focus(), 0);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [previewImage]);
+
+  const handleCloseModal = () => {
+    const id = previewImage?.id;
+    setPreviewImage(null);
+    setTimeout(() => triggerRefs.current[id]?.focus(), 0);
+  };
 
   return (
     <div
@@ -15,7 +44,7 @@ function Certifications() {
     >
       <Image
         src="/section.svg"
-        alt="Hero"
+        alt=""
         width={1572}
         height={795}
         className="absolute top-0 -z-10"
@@ -42,7 +71,7 @@ function Certifications() {
             <div className="w-3/4 h-3/4">
               <Image
                 src="/certificate.svg"
-                alt="Certification"
+                alt="Certification badge illustration"
                 width={400}
                 height={400}
                 className="w-full h-auto"
@@ -57,8 +86,10 @@ function Certifications() {
                   key={certification.id}
                   identifier={`certification-${certification.id}`}
                 >
-                  <div
-                    className="p-3 relative text-white cursor-pointer"
+                  <button
+                    ref={(el) => { triggerRefs.current[certification.id] = el; }}
+                    className="p-3 relative w-full text-left text-white cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#16f2b3] rounded-lg"
+                    aria-haspopup={certification.image ? "dialog" : undefined}
                     onClick={() => {
                       if (certification.image) {
                         setPreviewImage(certification);
@@ -69,7 +100,7 @@ function Certifications() {
                   >
                     <Image
                       src="/blur-23.svg"
-                      alt="Hero"
+                      alt=""
                       width={1080}
                       height={200}
                       className="absolute bottom-0 opacity-80"
@@ -81,17 +112,17 @@ function Certifications() {
                     </div>
                     <div className="flex items-center gap-x-8 px-3 py-5">
                       {certification.image ? (
-                        <div className="transition-all duration-300 hover:scale-125">
+                        <div className="transition-all duration-300 hover:scale-125" aria-hidden="true">
                           <Image
                             src={certification.image}
-                            alt={certification.title}
+                            alt=""
                             width={36}
                             height={36}
                             className="rounded-md"
                           />
                         </div>
                       ) : (
-                        <div className="text-violet-500 transition-all duration-300 hover:scale-125">
+                        <div className="text-violet-500 transition-all duration-300 hover:scale-125" aria-hidden="true">
                           <BsPatchCheckFill size={36} />
                         </div>
                       )}
@@ -104,7 +135,7 @@ function Certifications() {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </button>
                 </GlowCard>
               ))}
             </div>
@@ -115,31 +146,35 @@ function Certifications() {
       {previewImage && (
         <div
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
-          onClick={() => setPreviewImage(null)}
+          onClick={handleCloseModal}
         >
           <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cert-modal-title"
             className="relative max-w-xl w-full max-h-[90vh] flex flex-col items-center"
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              onClick={() => setPreviewImage(null)}
+              ref={closeButtonRef}
+              onClick={handleCloseModal}
               className="absolute -right-2 -top-2 z-10 bg-[#1a1443] text-white w-8 h-8 rounded-full flex items-center justify-center text-lg hover:bg-pink-600 transition-colors duration-300"
+              aria-label="Close certification preview"
             >
-              ✕
+              <span aria-hidden="true">✕</span>
             </button>
             <div className="overflow-auto max-h-[80vh] w-full rounded-lg">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 key={previewImage.id}
                 src={previewImage.image}
-                alt={previewImage.title}
+                alt={`${previewImage.title} certificate`}
                 className="w-full h-auto rounded-lg select-none"
                 draggable={false}
                 onContextMenu={(e) => e.preventDefault()}
-                style={{ pointerEvents: "none" }}
               />
             </div>
-            <p className="text-center text-white mt-4 text-lg">
+            <p id="cert-modal-title" className="text-center text-white mt-4 text-lg">
               {previewImage.title}
             </p>
           </div>
