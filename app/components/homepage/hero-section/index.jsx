@@ -259,6 +259,30 @@ function HeroSection() {
                 <span className="text-amber-300">GitHub Actions</span>
                 <span className="text-gray-400">{"'],"}</span>
               </div>
+              {/* NEW FIELDS START HERE */}
+              <div>
+                <span className="ml-4 lg:ml-8 mr-2 text-white">
+                  specialities:
+                </span>
+                <span className="text-gray-400">{`['`}</span>
+                <span className="text-amber-300">AI-Augmented QA</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">Accessibility (WCAG)</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">AI Generated Tests</span>
+                <span className="text-gray-400">{"'],"}</span>
+              </div>
+              <div>
+                <span className="ml-4 lg:ml-8 mr-2 text-white">aiTooling:</span>
+                <span className="text-gray-400">{`['`}</span>
+                <span className="text-amber-300">MCP Agents</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">LLM-Assisted Scripting</span>
+                <span className="text-gray-400">{"', '"}</span>
+                <span className="text-amber-300">Prompt Engineering</span>
+                <span className="text-gray-400">{"'],"}</span>
+              </div>
+              {/* NEW FIELDS END HERE */}
               <div>
                 <span className="ml-4 lg:ml-8 mr-2 text-white">
                   accessibilityAdvocate:
