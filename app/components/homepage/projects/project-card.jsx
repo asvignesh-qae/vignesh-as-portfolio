@@ -248,6 +248,7 @@ function ProjectCard({ project }) {
                   onClick={(e) => handleLinkClick(e, project.code)}
                   className="text-amber-300 underline hover:text-[#16f2b3] cursor-pointer"
                   aria-label={`View source code for ${project.name} (opens README preview)`}
+                  tabIndex={-1}
                 >
                   {project.code}
                 </a>
@@ -264,6 +265,7 @@ function ProjectCard({ project }) {
                   onClick={(e) => handleLinkClick(e, project.demo)}
                   className="text-amber-300 underline hover:text-[#16f2b3] cursor-pointer"
                   aria-label={`View demo for ${project.name} (opens README preview)`}
+                  tabIndex={-1}
                 >
                   {project.demo}
                 </a>
@@ -282,7 +284,7 @@ function ProjectCard({ project }) {
                     <span className="text-gray-400">{`, `}</span>
                     <span className="text-white">url:</span>
                     <span className="text-gray-400">{` '`}</span>
-                    <a href={report.url} target="_blank" rel="noopener noreferrer" className="text-[#16f2b3] underline hover:text-amber-300">
+                    <a href={report.url} target="_blank" rel="noopener noreferrer" className="text-[#16f2b3] underline hover:text-amber-300" tabIndex={-1}>
                       {report.url}
                     </a>
                     <span className="text-gray-400">{`' }`}{i < project.liveReports.length - 1 ? ',' : ''}</span>
