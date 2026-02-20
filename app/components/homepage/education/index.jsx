@@ -48,7 +48,7 @@ function Education() {
                     <div className="p-3 relative text-white">
                       <Image
                         src="/blur-23.svg"
-                        alt="Hero"
+                        alt=""
                         width={1080}
                         height={200}
                         className="absolute bottom-0 opacity-80"

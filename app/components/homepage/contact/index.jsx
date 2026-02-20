@@ -39,7 +39,7 @@ function ContactSection() {
                 {personalData.phones.map((p, i) => (
                   <span key={i} className="flex items-center gap-1">
                     {i > 0 && <span className="mx-1">/</span>}
-                    <img src={p.flag} alt="" width={20} height={14} className="inline-block" />
+                    <img src={p.flag} alt={`${p.country} flag`} width={20} height={14} className="inline-block" />
                     {p.number}
                   </span>
                 ))}

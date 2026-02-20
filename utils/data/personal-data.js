@@ -16,8 +16,8 @@ export const personalData = {
   ],
   email: "asvignesh.qae@gmail.com",
   phones: [
-    { flag: "https://flagcdn.com/w40/hu.png", number: "+36 20 4824010" },
-    { flag: "https://flagcdn.com/w40/in.png", number: "+91 8144474445" },
+    { flag: "https://flagcdn.com/w40/hu.png", country: "Hungary", number: "+36 20 4824010" },
+    { flag: "https://flagcdn.com/w40/in.png", country: "India", number: "+91 8144474445" },
   ],
   address: "Budapest, Hungary",
   github: "https://github.com/asvignesh-qae",
