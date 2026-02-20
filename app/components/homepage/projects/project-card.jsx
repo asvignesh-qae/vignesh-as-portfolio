@@ -4,6 +4,8 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { FaTimes } from 'react-icons/fa';
+import { FaChartBar } from 'react-icons/fa';
+import { BsCircleFill } from 'react-icons/bs';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -177,7 +179,7 @@ function ProjectCard({ project }) {
                   </React.Fragment>
                 ))
               }
-              <span className="text-gray-400">{"],"}</span>
+              <span className="text-gray-400">{`'],`}</span>
             </div>
             <div>
               <span className="ml-4 lg:ml-8 mr-2 text-white">myRole:</span>
@@ -224,8 +226,53 @@ function ProjectCard({ project }) {
                 <span className="text-gray-400">{`',`}</span>
               </div>
             )}
+            {project.liveReports?.length > 0 && (
+              <div className="ml-4 lg:ml-8 mr-2">
+                <span className="text-white">liveReports:</span>
+                <span className="text-gray-400">{` [`}</span>
+                {project.liveReports.map((report, i) => (
+                  <div key={i} className="ml-4">
+                    <span className="text-gray-400">{`{ `}</span>
+                    <span className="text-white">label:</span>
+                    <span className="text-amber-300">{` '${report.label}'`}</span>
+                    <span className="text-gray-400">{`, `}</span>
+                    <span className="text-white">url:</span>
+                    <span className="text-gray-400">{` '`}</span>
+                    <a href={report.url} target="_blank" rel="noopener noreferrer" className="text-[#16f2b3] underline hover:text-amber-300">
+                      {report.url}
+                    </a>
+                    <span className="text-gray-400">{`' }`}{i < project.liveReports.length - 1 ? ',' : ''}</span>
+                  </div>
+                ))}
+                <span className="text-gray-400">{`],`}</span>
+              </div>
+            )}
             <div><span className="text-gray-400">{`};`}</span></div>
           </code>
+
+          {project.liveReports?.length > 0 && (
+            <div className="mt-5 pt-4 border-t border-indigo-900/50 flex flex-wrap gap-3">
+              {project.liveReports.map((report, i) => (
+                <a
+                  key={i}
+                  href={report.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2.5 px-4 py-2 rounded-lg bg-[#16f2b3]/10 border border-[#16f2b3]/30 text-[#16f2b3] text-sm font-medium hover:bg-[#16f2b3]/20 hover:border-[#16f2b3]/60 transition-all duration-200 group"
+                >
+                  <span className="relative flex h-2.5 w-2.5 flex-shrink-0">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#16f2b3] opacity-75"></span>
+                    <BsCircleFill className="relative inline-flex text-[#16f2b3]" size={10} />
+                  </span>
+                  <FaChartBar size={13} />
+                  <span>{report.label}</span>
+                  <svg className="w-3.5 h-3.5 opacity-60 group-hover:translate-x-0.5 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              ))}
+            </div>
+          )}
         </div>
     </div>
   );

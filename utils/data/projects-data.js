@@ -8,6 +8,7 @@ export const projectsData = [
     role: "Senior Software Test Automation Engineer / SDET",
     code: "",
     demo: "",
+    liveReports: [],
     impact: `Reduced manual QA effort by 70% and manual QA time by 80% through automation of complex E2E UI + API workflows, leading to faster release cycles and improved software quality. Enhanced accessibility compliance, resulting in a 30% increase in accessibility score and a more inclusive user experience.`,
   },
   {
@@ -19,6 +20,9 @@ export const projectsData = [
     role: "Senior Software Test Automation Engineer / SDET",
     code: "https://github.com/asvignesh-qae/SauceDemo-Automation/blob/main/README.md",
     demo: "",
+    liveReports: [
+      { label: "Playwright HTML Report", url: "https://asvignesh-qae.github.io/SauceDemo-Automation/", type: "playwright" },
+    ],
     impact: ``,
   },
   {
@@ -37,6 +41,10 @@ export const projectsData = [
     role: "Senior Software Test Automation Engineer / SDET",
     code: "https://github.com/asvignesh-qae/Genesys-Demo/blob/main/README.md",
     demo: "",
+    liveReports: [
+      { label: "Allure TestNG Report", url: "https://asvignesh-qae.github.io/Genesys-Demo/testng/", type: "allure" },
+      { label: "Allure Cucumber Report", url: "https://asvignesh-qae.github.io/Genesys-Demo/cucumber/", type: "allure" },
+    ],
     impact: ``,
   },
 ];
@@ -52,4 +60,5 @@ export const projectsData = [
 //     role: '',
 //     code: '',
 //     demo: '',
+//     liveReports: [],
 // },
