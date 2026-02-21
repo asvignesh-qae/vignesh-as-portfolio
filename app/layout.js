@@ -81,9 +81,9 @@ export const metadata = {
   icons: {
     icon: "/favicon-vignesh.ico",
   },
-  verification:{
-    google: "4efMyL7VizkRdZ6BEQf3DGnHg7gi7MXORkUggoIbEA",
-  }
+  verification: {
+    google: "-4efMyL7VizkRdZ6BEQf3DGnHg7gi7MXORkUggoIbEA",
+  },
 };
 
 const jsonLd = {
