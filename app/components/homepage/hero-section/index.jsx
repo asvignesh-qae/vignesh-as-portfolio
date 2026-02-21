@@ -47,7 +47,7 @@ function HeroSection() {
     <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
       <Image
         src="/hero.svg"
-        alt="Hero"
+        alt=""
         width={1572}
         height={795}
         className="absolute -top-[98px] -z-10"
