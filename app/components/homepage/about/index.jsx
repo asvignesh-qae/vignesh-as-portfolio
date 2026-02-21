@@ -8,7 +8,7 @@ import { FaUniversalAccess, FaRobot } from "react-icons/fa";
 const iconMap = {
   "flag-hu": (
     <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#1a1443] flex-shrink-0" aria-hidden="true">
-      <img src="https://flagcdn.com/w20/hu.png" alt="" width={20} height={13} className="rounded-sm" />
+      <img src="https://flagcdn.com/w20/hu.png" alt="Hungary flag" width={20} height={13} className="rounded-sm" />
     </span>
   ),
   "accessibility": (

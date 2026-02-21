@@ -58,13 +58,13 @@ export default function AxeScanner() {
         ref={triggerRef}
         onClick={runScan}
         disabled={status === "scanning"}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-semibold border border-violet-500/50 bg-violet-900/20 text-violet-300 hover:bg-violet-900/40 hover:border-violet-400 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+        className="flex items-center gap-1 hover:gap-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-3 md:px-8 py-3 md:py-4 text-center text-xs md:text-sm font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out hover:text-white hover:no-underline md:font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
         aria-label="Run an axe-core accessibility scan on this page"
       >
         {status === "scanning" ? (
-          <ImSpinner8 size={10} aria-hidden="true" className="animate-spin" />
+          <ImSpinner8 size={16} aria-hidden="true" className="animate-spin" />
         ) : (
-          <FaUniversalAccess size={10} aria-hidden="true" />
+          <FaUniversalAccess size={16} aria-hidden="true" />
         )}
         <span>{status === "scanning" ? "Scanning…" : "Run Axe Scan"}</span>
       </button>
