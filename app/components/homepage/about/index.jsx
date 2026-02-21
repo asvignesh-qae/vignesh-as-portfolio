@@ -3,6 +3,25 @@
 
 import { useEffect, useRef, useState } from "react";
 import { personalData } from "@/utils/data/personal-data";
+import { FaUniversalAccess, FaRobot } from "react-icons/fa";
+
+const iconMap = {
+  "flag-hu": (
+    <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#1a1443] flex-shrink-0" aria-hidden="true">
+      <img src="https://flagcdn.com/w20/hu.png" alt="" width={20} height={13} className="rounded-sm" />
+    </span>
+  ),
+  "accessibility": (
+    <span className="flex items-center justify-center w-8 h-8 rounded-full bg-green-900/40 flex-shrink-0" aria-hidden="true">
+      <FaUniversalAccess size={16} className="text-green-400" />
+    </span>
+  ),
+  "ai": (
+    <span className="flex items-center justify-center w-8 h-8 rounded-full bg-violet-900/40 flex-shrink-0" aria-hidden="true">
+      <FaRobot size={16} className="text-violet-400" />
+    </span>
+  ),
+};
 
 function AboutSection() {
   const [isColor, setIsColor] = useState(false);
@@ -43,9 +62,12 @@ function AboutSection() {
           <p className="font-medium mt-8 mb-5 text-[#16f2b3] text-xl uppercase">
             What I bring?
           </p>
-          <ul className="text-gray-200 text-sm lg:text-lg list-none space-y-3">
+          <ul className="text-gray-200 text-sm lg:text-lg list-none space-y-4">
             {personalData.whatIBring.map((point, index) => (
-              <li key={index}>{point}</li>
+              <li key={index} className="flex items-start gap-3">
+                {iconMap[point.icon]}
+                <span>{point.text}</span>
+              </li>
             ))}
           </ul>
         </div>

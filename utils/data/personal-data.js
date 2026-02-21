@@ -10,9 +10,18 @@ export const personalData = {
     Axe-core. Frequently leads automation design and execution across Agile, multi-team environments in Europe.`,
   ],
   whatIBring: [
-    "🌍 Based in Budapest, with Hungarian Permanent Residency — no visa sponsorship needed, available to work in Hungary and anywhere within EEA remotely.",
-    "♿ Accessibility-First Tester — hands-on experience implementing WCAG compliance using axe-core, with a 30% measurable improvement in accessibility scores on production applications.",
-    "🤖 AI-Augmented QA — actively integrating AI tools and MCP agents into test automation workflows, bridging traditional QA with the next generation of intelligent testing.",
+    {
+      icon: "flag-hu",
+      text: "Based in Budapest, with Hungarian Permanent Residency — no visa sponsorship needed, available to work in Hungary and anywhere within EEA remotely.",
+    },
+    {
+      icon: "accessibility",
+      text: "Accessibility-First Tester — hands-on experience implementing WCAG compliance using axe-core, with a 30% measurable improvement in accessibility scores on production applications.",
+    },
+    {
+      icon: "ai",
+      text: "AI-Augmented QA — actively integrating AI tools and MCP agents into test automation workflows, bridging traditional QA with the next generation of intelligent testing.",
+    },
   ],
   email: "asvignesh.qae@gmail.com",
   phones: [

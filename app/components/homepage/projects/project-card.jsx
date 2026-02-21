@@ -191,6 +191,11 @@ function ProjectCard({ project }) {
       )}
 
       <div className="overflow-hidden border-t-[2px] border-indigo-900 px-4 lg:px-8 py-4 lg:py-8">
+          {project.executiveSummary && (
+            <p className="mb-5 text-sm md:text-base font-bold text-white leading-snug border-l-4 border-[#16f2b3] pl-3 bg-[#16f2b3]/5 py-2 rounded-r-md">
+              {project.executiveSummary}
+            </p>
+          )}
           <code className="font-mono text-xs md:text-sm lg:text-base" aria-hidden="true">
             <div className="blink">
               <span className="mr-2 text-pink-500">const</span>

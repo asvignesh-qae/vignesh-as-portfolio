@@ -2,7 +2,8 @@
 import Link from "next/link";
 import { CgGitFork } from "react-icons/cg";
 import { IoStar } from "react-icons/io5";
-import { FaUniversalAccess } from "react-icons/fa";
+import { FaUniversalAccess, FaCheckCircle } from "react-icons/fa";
+import AxeScanner from "./helper/axe-scanner";
 
 function Footer() {
   return (
@@ -23,12 +24,20 @@ function Footer() {
               Vignesh Ambalam Suresh
             </Link>
           </p>
-          <div
-            aria-label="This portfolio has been audited for accessibility using axe-core"
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-green-900/30 border border-green-500/40 text-green-400"
-          >
-            <FaUniversalAccess size={13} aria-hidden="true" />
-            <span>Accessibility Audited · axe-core</span>
+          <div className="flex flex-col items-center gap-2">
+            <div
+              role="img"
+              aria-label="WCAG 2.1 AA Compliant — verified by axe-core"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-green-900/20 border border-green-500/50 text-green-400 shadow-[0_0_12px_0_rgba(74,222,128,0.15)]"
+            >
+              <FaUniversalAccess size={14} aria-hidden="true" className="text-green-400" />
+              <span className="flex flex-col leading-tight">
+                <span className="text-green-300 font-bold tracking-wide">WCAG 2.1 AA Compliant</span>
+                <span className="text-green-500/80 text-[10px] tracking-wider">Verified by axe-core</span>
+              </span>
+              <FaCheckCircle size={13} aria-hidden="true" className="text-green-400" />
+            </div>
+            <AxeScanner />
           </div>
           <div className="flex items-center gap-5">
             <Link
