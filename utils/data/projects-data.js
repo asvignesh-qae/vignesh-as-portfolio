@@ -21,7 +21,16 @@ export const projectsData = [
     code: "https://github.com/asvignesh-qae/SauceDemo-Automation/blob/main/README.md",
     demo: "",
     liveReports: [
-      { label: "Playwright HTML Report", url: "https://asvignesh-qae.github.io/SauceDemo-Automation/", type: "playwright" },
+      {
+        label: "Playwright UI HTML Report",
+        url: "https://asvignesh-qae.github.io/SauceDemo-Automation/ui/",
+        type: "playwright",
+      },
+      {
+        label: "Playwright A11Y ♿ HTML Report",
+        url: "https://asvignesh-qae.github.io/SauceDemo-Automation/a11y/",
+        type: "playwright",
+      },
     ],
     impact: ``,
   },
@@ -42,8 +51,16 @@ export const projectsData = [
     code: "https://github.com/asvignesh-qae/Genesys-Demo/blob/main/README.md",
     demo: "",
     liveReports: [
-      { label: "Allure TestNG Report", url: "https://asvignesh-qae.github.io/Genesys-Demo/testng/", type: "allure" },
-      { label: "Allure Cucumber Report", url: "https://asvignesh-qae.github.io/Genesys-Demo/cucumber/", type: "allure" },
+      {
+        label: "Allure TestNG Report",
+        url: "https://asvignesh-qae.github.io/Genesys-Demo/testng/",
+        type: "allure",
+      },
+      {
+        label: "Allure Cucumber Report",
+        url: "https://asvignesh-qae.github.io/Genesys-Demo/cucumber/",
+        type: "allure",
+      },
     ],
     impact: ``,
   },
