@@ -6,34 +6,34 @@ import { BsPatchCheckFill } from "react-icons/bs";
 import GlowCard from "../../helper/glow-card";
 
 function Certifications() {
-  const [previewImage, setPreviewImage] = useState(null);
+  const [previewId, setPreviewId] = useState(null);
+  const previewImage = certifications.find((c) => c.id === previewId) ?? null;
   const closeButtonRef = useRef(null);
   const triggerRefs = useRef({});
 
   // Focus close button when modal opens
   useEffect(() => {
-    if (previewImage) {
+    if (previewId) {
       closeButtonRef.current?.focus();
     }
-  }, [previewImage]);
+  }, [previewId]);
 
   // Close on Escape key and return focus to trigger
   useEffect(() => {
-    if (!previewImage) return;
+    if (!previewId) return;
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
-        const id = previewImage.id;
-        setPreviewImage(null);
-        setTimeout(() => triggerRefs.current[id]?.focus(), 0);
+        setPreviewId(null);
+        setTimeout(() => triggerRefs.current[previewId]?.focus(), 0);
       }
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [previewImage]);
+  }, [previewId]);
 
   const handleCloseModal = () => {
-    const id = previewImage?.id;
-    setPreviewImage(null);
+    const id = previewId;
+    setPreviewId(null);
     setTimeout(() => triggerRefs.current[id]?.focus(), 0);
   };
 
@@ -92,7 +92,7 @@ function Certifications() {
                     aria-haspopup={certification.image ? "dialog" : undefined}
                     onClick={() => {
                       if (certification.image) {
-                        setPreviewImage(certification);
+                        setPreviewId(certification.id);
                       } else if (certification.link) {
                         window.open(certification.link, "_self");
                       }
