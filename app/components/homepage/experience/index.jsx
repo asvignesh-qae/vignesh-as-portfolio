@@ -13,7 +13,7 @@ function Experience() {
   const [expandedId, setExpandedId] = useState(null);
 
   const handleToggle = (id) => {
-    setExpandedId(expandedId === id ? null : id);
+    setExpandedId(prev => prev === id ? null : id);
   };
 
   return (
@@ -99,8 +99,8 @@ function Experience() {
                     </button>
                     <div
                       id={`exp-details-${exp.id}`}
-                      className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                        expandedId === exp.id ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
+                      className={`overflow-hidden transition-all ease-in-out ${
+                        expandedId === exp.id ? 'max-h-[2000px] opacity-100 duration-500' : 'max-h-0 opacity-0 duration-200'
                       }`}
                     >
                       {exp.bullets && (
