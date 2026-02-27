@@ -83,7 +83,6 @@ export const projectsData = [
       "Groq LLM's",
       "GitHub Actions",
       "Node.js",
-      "GitHub Pages",
     ],
     role: "Senior Software Test Automation Engineer / SDET",
     code: "https://github.com/asvignesh-qae/groq-api-testing-postman-newman/blob/main/README.md",

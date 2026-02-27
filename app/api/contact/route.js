@@ -70,7 +70,12 @@ async function sendEmail(payload, message) {
 export async function POST(request) {
   try {
     const payload = await request.json();
-    const { name, email, message: userMessage } = payload;
+    const { name, email, message: userMessage, website } = payload;
+
+    // Honeypot: bots fill hidden fields, humans don't
+    if (website) {
+      return NextResponse.json({ success: true, message: 'Message sent successfully!' }, { status: 200 });
+    }
     const token = process.env.TELEGRAM_BOT_TOKEN;
     const chat_id = process.env.TELEGRAM_CHAT_ID;
 
