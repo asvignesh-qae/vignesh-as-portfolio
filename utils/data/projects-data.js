@@ -49,6 +49,7 @@ export const projectsData = [
       "Selenium",
       "Java",
       "TestNG",
+      "Cucumber",
       "Maven",
       "Rest-Assured",
       "GitHub Actions",

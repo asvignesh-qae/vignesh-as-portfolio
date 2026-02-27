@@ -272,7 +272,7 @@ export default function AxeScanner() {
                       )}
 
                       {/* Clickable stats row — single line, no wrapping */}
-                      <div className="flex gap-3 mt-2 text-xs flex-nowrap items-center justify-center">
+                      <div className="flex flex-wrap gap-2 mt-2 text-xs items-center justify-center">
                         <button
                           onClick={() => toggleSection("passes")}
                           className="flex items-center gap-1.5 text-green-400 hover:text-green-300 transition-colors whitespace-nowrap"
@@ -486,7 +486,7 @@ export default function AxeScanner() {
             </div>
 
             {/* Footer */}
-            <div className="px-5 py-3 border-t border-[#30363d] text-xs text-[#8b949e] flex-shrink-0 flex items-center justify-between">
+            <div className="px-5 py-3 border-t border-[#30363d] text-xs text-[#8b949e] flex-shrink-0 flex flex-wrap items-center justify-between gap-2">
               <span>Scanning against: WCAG 2.0 A · WCAG 2.0 AA · WCAG 2.1 AA</span>
               {status === "done" && results && sortedViolations.length > 0 && (
                 <button
