@@ -60,6 +60,19 @@ export default function AxeScanner() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [showModal]);
 
+  // Make all background content inert when modal is open so keyboard/SR users
+  // cannot navigate outside the modal. Runs after portal renders into document.body.
+  useEffect(() => {
+    if (!showModal) return;
+    const modalEl = document.getElementById("axe-modal");
+    const portalRoot = modalEl?.closest("body > *");
+    const siblings = Array.from(document.body.children).filter(
+      (el) => el !== portalRoot
+    );
+    siblings.forEach((el) => el.setAttribute("inert", ""));
+    return () => siblings.forEach((el) => el.removeAttribute("inert"));
+  }, [showModal]);
+
   // Focus trap
   useEffect(() => {
     if (!showModal) return;
@@ -160,8 +173,31 @@ export default function AxeScanner() {
       )
     : [];
 
+  // Concise announcement for screen readers — always in the DOM so content
+  // changes are detected by aria-live. Never placed inside the modal portal.
+  const liveMessage = (() => {
+    if (status === "done" && results) {
+      if (sortedViolations.length === 0) {
+        return `Scan complete. No accessibility violations detected. ${results.passes.length} rules passed${results.incomplete.length > 0 ? `, ${results.incomplete.length} require manual review` : ""}.`;
+      }
+      return `Scan complete. ${sortedViolations.length} accessibility violation${sortedViolations.length > 1 ? "s" : ""} found.`;
+    }
+    if (status === "error") return "Accessibility scan failed. Please try again.";
+    return "";
+  })();
+
   return (
     <>
+      {/* Dedicated SR live region — always mounted so aria-live fires on content change */}
+      <div
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+      >
+        {liveMessage}
+      </div>
+
       <button
         ref={triggerRef}
         onClick={runScan}
@@ -186,19 +222,19 @@ export default function AxeScanner() {
             id="axe-modal"
             role="dialog"
             aria-modal="true"
-            aria-labelledby="axe-modal-title"
-            aria-describedby="axe-modal-desc"
+            aria-labelledby="scan-title"
+            aria-describedby="scan-summary"
             className="relative w-full max-w-3xl max-h-[85vh] bg-[#0d1117] rounded-xl border border-[#30363d] shadow-2xl flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            <span id="axe-modal-desc" className="sr-only">
+            <span id="scan-summary" className="sr-only">
               Accessibility scan results for this page using axe-core against WCAG 2.0 A, WCAG 2.0 AA, and WCAG 2.1 AA standards.
             </span>
 
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-[#30363d] flex-shrink-0">
               <h2
-                id="axe-modal-title"
+                id="scan-title"
                 ref={headingRef}
                 tabIndex={-1}
                 className="text-white font-semibold flex items-center gap-2 text-sm outline-none"
@@ -215,8 +251,8 @@ export default function AxeScanner() {
               </button>
             </div>
 
-            {/* Body — aria-live announces results to screen readers when scan completes */}
-            <div className="overflow-y-auto px-5 py-5 flex-1" aria-live="polite" aria-atomic="true">
+            {/* Body */}
+            <div className="overflow-y-auto px-5 py-5 flex-1">
               {status === "done" && results && (
                 <>
                   {sortedViolations.length === 0 ? (
@@ -235,47 +271,47 @@ export default function AxeScanner() {
                         </div>
                       )}
 
-                      {/* Clickable stats row */}
-                      <div className="flex gap-4 mt-2 text-sm flex-wrap justify-center">
+                      {/* Clickable stats row — single line, no wrapping */}
+                      <div className="flex gap-3 mt-2 text-xs flex-nowrap items-center justify-center">
                         <button
                           onClick={() => toggleSection("passes")}
-                          className="flex items-center gap-1.5 text-green-400 hover:text-green-300 transition-colors"
+                          className="flex items-center gap-1.5 text-green-400 hover:text-green-300 transition-colors whitespace-nowrap"
                           aria-expanded={expandedSection === "passes"}
                         >
                           ✓ {results.passes.length} rules passed
                           {expandedSection === "passes"
-                            ? <FaChevronUp size={10} aria-hidden="true" />
-                            : <FaChevronDown size={10} aria-hidden="true" />}
+                            ? <FaChevronUp size={9} aria-hidden="true" />
+                            : <FaChevronDown size={9} aria-hidden="true" />}
                         </button>
 
                         {results.incomplete.length > 0 && (
-                          <button
-                            onClick={() => toggleSection("incomplete")}
-                            className="flex flex-col items-center text-yellow-400 hover:text-yellow-300 transition-colors"
-                            aria-expanded={expandedSection === "incomplete"}
-                          >
-                            <span className="flex items-center gap-1.5">
-                              ⚠ {results.incomplete.length} item{results.incomplete.length > 1 ? "s" : ""} require{results.incomplete.length === 1 ? "s" : ""} manual accessibility review
+                          <>
+                            <span className="text-[#30363d]" aria-hidden="true">·</span>
+                            <button
+                              onClick={() => toggleSection("incomplete")}
+                              className="flex items-center gap-1.5 text-yellow-400 hover:text-yellow-300 transition-colors whitespace-nowrap"
+                              aria-expanded={expandedSection === "incomplete"}
+                              title="Automated tools cannot fully verify this rule."
+                            >
+                              ⚠ {results.incomplete.length} item{results.incomplete.length > 1 ? "s" : ""} require{results.incomplete.length === 1 ? "s" : ""} manual review
                               {expandedSection === "incomplete"
-                                ? <FaChevronUp size={10} aria-hidden="true" />
-                                : <FaChevronDown size={10} aria-hidden="true" />}
-                            </span>
-                            <span className="text-[10px] text-yellow-400 mt-0.5">
-                              Automated tools cannot fully verify this.
-                            </span>
-                          </button>
+                                ? <FaChevronUp size={9} aria-hidden="true" />
+                                : <FaChevronDown size={9} aria-hidden="true" />}
+                            </button>
+                          </>
                         )}
 
+                        <span className="text-[#30363d]" aria-hidden="true">·</span>
                         <button
                           onClick={() => toggleSection("inapplicable")}
-                          className="flex items-center gap-1.5 text-[#8b949e] hover:text-white transition-colors"
+                          className="flex items-center gap-1.5 text-[#8b949e] hover:text-white transition-colors whitespace-nowrap"
                           aria-expanded={expandedSection === "inapplicable"}
                         >
-                          <FaMinus size={10} aria-hidden="true" />
-                          {results.inapplicable.length} not applicable
+                          <FaMinus size={9} aria-hidden="true" />
+                          {results.inapplicable.length} rules not applicable to this page
                           {expandedSection === "inapplicable"
-                            ? <FaChevronUp size={10} aria-hidden="true" />
-                            : <FaChevronDown size={10} aria-hidden="true" />}
+                            ? <FaChevronUp size={9} aria-hidden="true" />
+                            : <FaChevronDown size={9} aria-hidden="true" />}
                         </button>
                       </div>
 
