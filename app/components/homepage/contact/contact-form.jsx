@@ -182,8 +182,7 @@ function ContactForm() {
             name="website"
             value={userInput.website}
             onChange={(e) => setUserInput((prev) => ({ ...prev, website: e.target.value }))}
-            style={{ display: "none" }}
-            tabIndex={-1}
+            style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none", width: 0, height: 0 }}
             aria-hidden="true"
             autoComplete="off"
           />
