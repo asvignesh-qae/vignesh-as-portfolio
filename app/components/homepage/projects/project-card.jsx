@@ -8,6 +8,40 @@ import { BsCircleFill } from 'react-icons/bs';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
+let mermaidIdCounter = 0;
+
+function MermaidDiagram({ code }) {
+  const containerRef = useRef(null);
+  const idRef = useRef(`mermaid-${++mermaidIdCounter}`);
+
+  useEffect(() => {
+    let cancelled = false;
+    import('mermaid').then(({ default: mermaid }) => {
+      mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+      mermaid.render(idRef.current, code).then(({ svg }) => {
+        if (!cancelled && containerRef.current) {
+          containerRef.current.innerHTML = svg;
+        }
+      }).catch(() => {
+        if (!cancelled && containerRef.current) {
+          containerRef.current.innerHTML = `<pre style="color:#f85149;font-size:0.75rem">${code}</pre>`;
+        }
+      });
+    });
+    return () => { cancelled = true; };
+  }, [code]);
+
+  return <div ref={containerRef} className="my-4 flex justify-center overflow-x-auto" />;
+}
+
+function MarkdownCode({ className, children }) {
+  const match = /language-(\w+)/.exec(className || '');
+  if (match && match[1] === 'mermaid') {
+    return <MermaidDiagram code={String(children).trim()} />;
+  }
+  return <code className={className}>{children}</code>;
+}
+
 function toRawGitHubUrl(url) {
   // Convert https://github.com/user/repo/blob/branch/path
   // to https://raw.githubusercontent.com/user/repo/branch/path
@@ -181,7 +215,7 @@ function ProjectCard({ project }) {
               )}
               {markdown && (
                 <div className="github-markdown">
-                  <Markdown remarkPlugins={[remarkGfm]}>{markdown}</Markdown>
+                  <Markdown remarkPlugins={[remarkGfm]} components={{ code: MarkdownCode }}>{markdown}</Markdown>
                 </div>
               )}
             </div>
