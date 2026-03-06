@@ -3,7 +3,6 @@ import Link from "next/link";
 import { CgGitFork } from "react-icons/cg";
 import { IoStar } from "react-icons/io5";
 import { FaUniversalAccess, FaCheckCircle } from "react-icons/fa";
-import AxeScanner from "./helper/axe-scanner";
 
 function Footer() {
   return (
@@ -37,7 +36,6 @@ function Footer() {
               </span>
               <FaCheckCircle size={16} aria-hidden="true" className="text-green-400 shrink-0 ml-auto" />
             </div>
-            <AxeScanner />
           </div>
           <div className="flex items-center gap-5">
             <Link

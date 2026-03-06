@@ -100,6 +100,7 @@ function ContactIcon({ size }) {
 }
 import dynamic from "next/dynamic";
 import LighthouseMetrics from "./lighthouse-metrics";
+import AxeScanner from "@/app/components/helper/axe-scanner";
 const TypeAnimation = dynamic(
   () =>
     import("react-type-animation").then((m) => ({ default: m.TypeAnimation })),
@@ -125,12 +126,15 @@ function HeroSection() {
   const [showResume, setShowResume] = useState(false);
   const resumeTriggerRef = useRef(null);
   const resumeCloseRef = useRef(null);
+  const didOpenResumeRef = useRef(false);
 
-  // Focus close button when modal opens; return focus when it closes
+  // Focus close button when modal opens; return focus to trigger when it closes.
+  // Guard with didOpenResumeRef so focus is NOT stolen on initial page load.
   useEffect(() => {
     if (showResume) {
+      didOpenResumeRef.current = true;
       resumeCloseRef.current?.focus();
-    } else {
+    } else if (didOpenResumeRef.current) {
       resumeTriggerRef.current?.focus();
     }
   }, [showResume]);
@@ -263,9 +267,7 @@ function HeroSection() {
             </div>
           </div>
 
-          <LighthouseMetrics />
-
-          <div className="flex items-center gap-3">
+          <div className="mb-8 flex items-center gap-3">
             <Link
               href="#contact"
               className="px-4 text-xs md:px-8 py-4 md:text-sm rounded-full text-center font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out md:font-semibold flex items-center gap-1 hover:gap-3 bg-gradient-to-r to-pink-500 from-violet-600 hover:from-pink-500 hover:to-violet-600"
@@ -286,7 +288,11 @@ function HeroSection() {
               <span>Get Resume</span>
               <DownloadIcon size={16} />
             </button>
+
+            <AxeScanner />
           </div>
+
+          <LighthouseMetrics />
         </div>
         <div
           className="order-1 lg:order-2 from-[#0d1224] border-[#1b2c68a0] relative rounded-lg border bg-gradient-to-r to-[#0a0d37] overflow-hidden min-w-0"

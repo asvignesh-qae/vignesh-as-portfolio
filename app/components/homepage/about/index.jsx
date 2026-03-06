@@ -112,29 +112,27 @@ function AboutSection() {
           </ul>
         </div>
         <div className="flex justify-center order-1 lg:order-2">
-          <div
+          <button
             ref={imgRef}
-            className={`rounded-lg transition-all duration-1000 cursor-pointer relative w-full max-w-sm aspect-square overflow-hidden ${
+            type="button"
+            className={`rounded-lg transition-all duration-1000 cursor-pointer relative w-full max-w-sm aspect-square overflow-hidden border-0 bg-transparent p-0 ${
               isColor || inViewport
                 ? "grayscale-0"
                 : "grayscale hover:grayscale-0"
             }`}
             onClick={toggleColor}
-            onKeyDown={(e) => e.key === "Enter" && toggleColor()}
-            tabIndex={0}
-            role="button"
             aria-label="Toggle profile color"
           >
             <Image
               src={personalData.profile}
               alt={`Profile picture of ${personalData.name}`}
               fill
-              className="object-cover"
+              className="object-cover object-top"
               sizes="(max-width: 640px) calc(100vw - 48px), 384px"
               priority
               quality={40}
             />
-          </div>
+          </button>
         </div>
       </div>
     </section>

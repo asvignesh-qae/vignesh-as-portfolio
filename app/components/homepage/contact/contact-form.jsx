@@ -211,6 +211,7 @@ function ContactForm() {
               height: 0,
             }}
             aria-hidden="true"
+            tabIndex={-1}
             autoComplete="off"
           />
 
