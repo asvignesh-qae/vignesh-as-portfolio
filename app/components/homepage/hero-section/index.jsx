@@ -213,10 +213,10 @@ function HeroSection() {
             </div>
             <div className="rounded-lg border border-[#1b2c68a0] bg-[#0d1224] px-4 py-3 text-center col-span-2 md:col-span-1">
               <span className="block text-2xl font-bold text-[#16f2b3]">
-                98
+                99
               </span>
               <span className="text-xs text-gray-400 uppercase tracking-wider">
-                Lighthouse Score
+                Lighthouse Performance Score
               </span>
             </div>
           </div>
@@ -224,12 +224,10 @@ function HeroSection() {
           <div className="flex items-center gap-3">
             <Link
               href="#contact"
-              className="bg-gradient-to-r to-pink-500 from-violet-600 p-[1px] rounded-full transition-all duration-300 hover:from-pink-500 hover:to-violet-600"
+              className="px-4 text-xs md:px-8 py-4 md:text-sm rounded-full text-center font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out md:font-semibold flex items-center gap-1 hover:gap-3 bg-gradient-to-r to-pink-500 from-violet-600 hover:from-pink-500 hover:to-violet-600"
             >
-              <button className="px-4 text-xs md:px-8 py-4 md:text-sm bg-[#0d1224] rounded-full border-none text-center font-medium uppercase tracking-wider text-[#ffff] no-underline transition-all duration-200 ease-out md:font-semibold flex items-center gap-1 hover:gap-3">
-                <span>Contact me</span>
-                <ContactIcon size={16} />
-              </button>
+              <span>Contact me</span>
+              <ContactIcon size={16} />
             </Link>
 
             <button
