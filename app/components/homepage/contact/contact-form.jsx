@@ -1,6 +1,7 @@
 "use client";
 import { isValidEmail } from "@/utils/check-email";
 import axios from "axios";
+import Link from "next/link";
 import { useState } from "react";
 import { TbMailForward } from "react-icons/tb";
 import { toast } from "react-toastify";
@@ -24,6 +25,9 @@ function validate(field, value) {
       if (value.trim().length < MIN_MESSAGE_LENGTH)
         return `Message must be at least ${MIN_MESSAGE_LENGTH} characters.`;
       return "";
+    case "consent":
+      if (!value) return "You must consent to data processing to send a message.";
+      return "";
     default:
       return "";
   }
@@ -32,8 +36,9 @@ function validate(field, value) {
 function ContactForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [userInput, setUserInput] = useState({ name: "", email: "", message: "", website: "" });
-  const [errors, setErrors] = useState({ name: "", email: "", message: "" });
-  const [touched, setTouched] = useState({ name: false, email: false, message: false });
+  const [errors, setErrors] = useState({ name: "", email: "", message: "", consent: "" });
+  const [touched, setTouched] = useState({ name: false, email: false, message: false, consent: false });
+  const [consent, setConsent] = useState(false);
 
   const handleChange = (field, value) => {
     setUserInput((prev) => ({ ...prev, [field]: value }));
@@ -61,19 +66,21 @@ function ContactForm() {
     const nameErr = validate("name", userInput.name);
     const emailErr = validate("email", userInput.email);
     const messageErr = validate("message", userInput.message);
+    const consentErr = validate("consent", consent);
 
-    setErrors({ name: nameErr, email: emailErr, message: messageErr });
-    setTouched({ name: true, email: true, message: true });
+    setErrors({ name: nameErr, email: emailErr, message: messageErr, consent: consentErr });
+    setTouched({ name: true, email: true, message: true, consent: true });
 
-    if (nameErr || emailErr || messageErr) return;
+    if (nameErr || emailErr || messageErr || consentErr) return;
 
     try {
       setIsLoading(true);
       await axios.post(`${process.env.NEXT_PUBLIC_APP_URL}/api/contact`, userInput);
       toast.success("Message sent successfully!");
       setUserInput({ name: "", email: "", message: "", website: "" });
-      setErrors({ name: "", email: "", message: "" });
-      setTouched({ name: false, email: false, message: false });
+      setErrors({ name: "", email: "", message: "", consent: "" });
+      setTouched({ name: false, email: false, message: false, consent: false });
+      setConsent(false);
     } catch (error) {
       toast.error(error?.response?.data?.message);
     } finally {
@@ -213,6 +220,61 @@ function ContactForm() {
             aria-label="Leave this field empty"
             autoComplete="off"
           />
+
+          {/* GDPR Consent */}
+          <div className="flex flex-col gap-1">
+            <div className="flex items-start gap-3">
+              <input
+                id="contact-consent"
+                type="checkbox"
+                checked={consent}
+                onChange={(e) => {
+                  setConsent(e.target.checked);
+                  if (touched.consent) {
+                    setErrors((prev) => ({
+                      ...prev,
+                      consent: validate("consent", e.target.checked),
+                    }));
+                  }
+                }}
+                onBlur={() => {
+                  setTouched((prev) => ({ ...prev, consent: true }));
+                  setErrors((prev) => ({
+                    ...prev,
+                    consent: validate("consent", consent),
+                  }));
+                }}
+                required
+                aria-required="true"
+                aria-invalid={touched.consent && !!errors.consent ? "true" : "false"}
+                aria-describedby={errors.consent ? "consent-error" : "consent-hint"}
+                className="mt-1 h-4 w-4 shrink-0 accent-[#16f2b3] cursor-pointer"
+              />
+              <label htmlFor="contact-consent" className="text-xs text-[#a0a8c0] leading-relaxed cursor-pointer">
+                I consent to my name, email address, and message being processed
+                by Vignesh Ambalam Suresh solely to respond to this inquiry. See
+                the{" "}
+                <Link
+                  href="/privacy-policy"
+                  className="text-[#16f2b3] underline hover:text-white transition-colors"
+                >
+                  Privacy Policy
+                </Link>{" "}
+                for details on data handling, retention, and your rights.{" "}
+                <span className="text-red-400" aria-hidden="true">*</span>
+              </label>
+            </div>
+            {touched.consent && errors.consent && (
+              <p id="consent-error" role="alert" className="text-xs text-red-400 ml-7">
+                {errors.consent}
+              </p>
+            )}
+            {!errors.consent && (
+              <p id="consent-hint" className="sr-only">
+                Required. You must consent to data processing to submit this form.
+              </p>
+            )}
+          </div>
 
           <div className="flex flex-col items-center gap-3">
             <button

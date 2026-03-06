@@ -1,10 +1,10 @@
-import { GoogleTagManager } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter } from "next/font/google";
 import dynamic from "next/dynamic";
 import { version } from "react";
 import Footer from "./components/footer";
+import CookieConsent from "./components/helper/cookie-consent";
 import ScrollToTop from "./components/helper/scroll-to-top";
 import Navbar from "./components/navbar";
 import "./css/card.scss";
@@ -140,10 +140,10 @@ export default function RootLayout({ children }) {
           <ScrollToTop />
         </main>
         <Footer />
+        <CookieConsent />
         <Analytics />
         <SpeedInsights />
       </body>
-      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM} />
     </html>
   );
 }

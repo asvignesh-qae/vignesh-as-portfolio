@@ -12,17 +12,25 @@ function Footer() {
           <div className="absolute top-0 h-[1px] w-1/2  bg-gradient-to-r from-transparent via-violet-500 to-transparent"></div>
         </div>
         <div className="flex flex-col gap-4 md:gap-0 md:flex-row items-center justify-between">
-          <p className="text-sm">
-            © Developer Portfolio by{" "}
+          <div className="flex flex-col gap-1.5 text-sm">
+            <p>
+              © Developer Portfolio by{" "}
+              <Link
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://www.linkedin.com/in/vignesh-a-s"
+                className="text-[#16f2b3] underline"
+              >
+                Vignesh Ambalam Suresh
+              </Link>
+            </p>
             <Link
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.linkedin.com/in/vignesh-a-s"
-              className="text-[#16f2b3] underline"
+              href="/privacy-policy"
+              className="text-[#a0a8c0] text-xs underline hover:text-[#16f2b3] transition-colors w-fit"
             >
-              Vignesh Ambalam Suresh
+              Privacy Policy
             </Link>
-          </p>
+          </div>
           <div className="flex flex-col items-center gap-3">
             <div
               role="img"
