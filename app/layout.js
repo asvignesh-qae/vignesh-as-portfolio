@@ -9,10 +9,8 @@ import ScrollToTop from "./components/helper/scroll-to-top";
 import Navbar from "./components/navbar";
 import "./css/card.scss";
 import "./css/globals.scss";
-import "react-toastify/dist/ReactToastify.css";
-
-const ToastContainer = dynamic(() =>
-  import("react-toastify").then((m) => m.ToastContainer)
+const ToastProvider = dynamic(() =>
+  import("./components/helper/toast-provider")
 );
 const inter = Inter({ subsets: ["latin"] });
 
@@ -135,7 +133,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={inter.className}>
-        <ToastContainer />
+        <ToastProvider />
         <Navbar />
         <main className="min-h-screen relative mx-auto px-6 sm:px-12 lg:max-w-[70rem] xl:max-w-[76rem] 2xl:max-w-[92rem] text-white">
           {children}

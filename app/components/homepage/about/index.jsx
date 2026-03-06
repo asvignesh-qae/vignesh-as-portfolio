@@ -130,9 +130,9 @@ function AboutSection() {
               alt={`Profile picture of ${personalData.name}`}
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 100vw, 400px"
+              sizes="(max-width: 640px) calc(100vw - 48px), 384px"
               priority
-              quality={60}
+              quality={40}
             />
           </div>
         </div>

@@ -145,14 +145,14 @@ function Certifications() {
 
       {previewImage && (
         <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm px-4 pt-20 pb-4"
           onClick={handleCloseModal}
         >
           <div
             role="dialog"
             aria-modal="true"
             aria-labelledby="cert-modal-title"
-            className="relative max-w-xl w-full max-h-[90vh] flex flex-col items-center"
+            className="relative max-w-xl w-full max-h-[80vh] flex flex-col items-center"
             onClick={(e) => e.stopPropagation()}
           >
             <button

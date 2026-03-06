@@ -30,8 +30,14 @@ async function getData() {
     // Dev.to API unavailable — continue with local blogs only
   }
 
+  const normalizeTitle = (t) => t.replace(/[^\w\s]/g, "").toLowerCase().trim();
+
   const allBlogs = [...devToBlogs, ...localBlogs]
-    .filter((blog, index, self) => index === self.findIndex(b => b.url === blog.url))
+    .filter((blog, index, self) =>
+      index === self.findIndex(
+        (b) => b.url === blog.url || normalizeTitle(b.title) === normalizeTitle(blog.title)
+      )
+    )
     .sort(() => Math.random() - 0.5);
 
   return allBlogs;
