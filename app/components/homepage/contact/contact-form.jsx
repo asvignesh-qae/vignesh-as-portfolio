@@ -84,17 +84,23 @@ function ContactForm() {
   return (
     <div>
       <p className="font-medium mb-5 text-[#16f2b3] text-xl uppercase">
-        Contact with me
+        Let's work together
       </p>
       <div className="max-w-3xl text-white rounded-lg border border-[#464c6a] p-3 lg:p-5">
+        <h3 className="text-lg font-semibold bg-gradient-to-r from-pink-500 to-violet-600 bg-clip-text text-transparent mb-2">
+          Let&apos;s build something great
+        </h3>
         <p className="text-sm text-[#d3d8e8]">
-          {"Currently open to Senior SDET / Test Automation Engineer roles in the Hungary/EU. Reach out and let's talk."}
+          {
+            "Currently open to Senior SDET / Test Automation Engineer roles in the Hungary/EU. Reach out and let's talk."
+          }
         </p>
         <div className="mt-6 flex flex-col gap-4">
-
           {/* Name */}
           <div className="flex flex-col gap-1">
-            <label htmlFor="contact-name" className="text-base">Your Name:</label>
+            <label htmlFor="contact-name" className="text-base">
+              Your Name:
+            </label>
             <input
               id="contact-name"
               className={inputClass("name")}
@@ -117,7 +123,9 @@ function ContactForm() {
 
           {/* Email */}
           <div className="flex flex-col gap-1">
-            <label htmlFor="contact-email" className="text-base">Your Email:</label>
+            <label htmlFor="contact-email" className="text-base">
+              Your Email:
+            </label>
             <input
               id="contact-email"
               className={inputClass("email")}
@@ -141,18 +149,22 @@ function ContactForm() {
           {/* Message */}
           <div className="flex flex-col gap-1">
             <div className="flex items-center justify-between">
-              <label htmlFor="contact-message" className="text-base">Your Message:</label>
+              <label htmlFor="contact-message" className="text-base">
+                Your Message:
+              </label>
               <span
                 className={`text-xs ${
-                  userInput.message.length > 0 && userInput.message.length < MIN_MESSAGE_LENGTH
+                  userInput.message.length > 0 &&
+                  userInput.message.length < MIN_MESSAGE_LENGTH
                     ? "text-amber-400"
                     : "text-[#a0a8c0]"
                 }`}
               >
                 {userInput.message.length}/500
-                {userInput.message.length > 0 && userInput.message.length < MIN_MESSAGE_LENGTH && (
-                  <span className="ml-1">(min {MIN_MESSAGE_LENGTH})</span>
-                )}
+                {userInput.message.length > 0 &&
+                  userInput.message.length < MIN_MESSAGE_LENGTH && (
+                    <span className="ml-1">(min {MIN_MESSAGE_LENGTH})</span>
+                  )}
               </span>
             </div>
             <textarea
@@ -162,7 +174,9 @@ function ContactForm() {
               name="message"
               required
               aria-required="true"
-              aria-invalid={touched.message && !!errors.message ? "true" : "false"}
+              aria-invalid={
+                touched.message && !!errors.message ? "true" : "false"
+              }
               aria-describedby={errors.message ? "message-error" : undefined}
               rows="4"
               value={userInput.message}
@@ -170,7 +184,11 @@ function ContactForm() {
               onBlur={() => handleBlur("message")}
             />
             {touched.message && errors.message && (
-              <p id="message-error" role="alert" className="text-xs text-red-400">
+              <p
+                id="message-error"
+                role="alert"
+                className="text-xs text-red-400"
+              >
                 {errors.message}
               </p>
             )}
@@ -181,8 +199,17 @@ function ContactForm() {
             type="text"
             name="website"
             value={userInput.website}
-            onChange={(e) => setUserInput((prev) => ({ ...prev, website: e.target.value }))}
-            style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none", width: 0, height: 0 }}
+            onChange={(e) =>
+              setUserInput((prev) => ({ ...prev, website: e.target.value }))
+            }
+            style={{
+              position: "absolute",
+              left: "-9999px",
+              opacity: 0,
+              pointerEvents: "none",
+              width: 0,
+              height: 0,
+            }}
             aria-hidden="true"
             autoComplete="off"
           />
@@ -193,7 +220,9 @@ function ContactForm() {
               onClick={handleSendMail}
               disabled={isLoading}
               aria-busy={isLoading}
-              aria-label={isLoading ? "Sending message, please wait" : "Send message"}
+              aria-label={
+                isLoading ? "Sending message, please wait" : "Send message"
+              }
             >
               {isLoading ? (
                 <span>Sending Message...</span>
@@ -205,7 +234,6 @@ function ContactForm() {
               )}
             </button>
           </div>
-
         </div>
       </div>
     </div>

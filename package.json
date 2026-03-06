@@ -33,6 +33,19 @@
     "remark-gfm": "^4.0.1",
     "sharp": "^0.33.5"
   },
+  "browserslist": {
+    "production": [
+      "chrome >= 93",
+      "edge >= 93",
+      "firefox >= 92",
+      "safari >= 15"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.16",
     "autoprefixer": "latest",

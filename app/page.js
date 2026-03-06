@@ -1,14 +1,17 @@
 import { personalData } from "@/utils/data/personal-data";
 import { localBlogs } from "@/utils/data/blogs-data";
-import AboutSection from "./components/homepage/about";
-import Blog from "./components/homepage/blog";
-import ContactSection from "./components/homepage/contact";
-import Certifications from "./components/homepage/certifications";
-import Education from "./components/homepage/education";
-import Experience from "./components/homepage/experience";
+import dynamic from "next/dynamic";
 import HeroSection from "./components/homepage/hero-section";
-import Projects from "./components/homepage/projects";
-import Skills from "./components/homepage/skills";
+import AboutSection from "./components/homepage/about";
+
+// Below-fold sections: SSR'd for SEO but JS chunks loaded lazily on client
+const Experience = dynamic(() => import("./components/homepage/experience"));
+const Skills = dynamic(() => import("./components/homepage/skills"));
+const Projects = dynamic(() => import("./components/homepage/projects"));
+const Blog = dynamic(() => import("./components/homepage/blog"));
+const Education = dynamic(() => import("./components/homepage/education"));
+const Certifications = dynamic(() => import("./components/homepage/certifications"));
+const ContactSection = dynamic(() => import("./components/homepage/contact"));
 
 async function getData() {
   let devToBlogs = [];
@@ -16,7 +19,7 @@ async function getData() {
   try {
     const res = await fetch(
       `https://dev.to/api/articles?username=${personalData.devUsername}`,
-      { cache: 'no-store' },
+      { next: { revalidate: 3600 } },
     );
 
     if (res.ok) {

@@ -16,35 +16,66 @@ const GlowCard = ({ children , identifier}) => {
       opacity: 0,
     };
 
+    // Cache bounds so getBoundingClientRect() is never called in the hot path.
+    // Defer reads via rAF so they never happen synchronously after a DOM write.
+    let boundsCache = [];
+    let boundsRafId = null;
+    const refreshBounds = () => {
+      if (boundsRafId) return;
+      boundsRafId = requestAnimationFrame(() => {
+        boundsRafId = null;
+        boundsCache = Array.from(CARDS).map((card) => card.getBoundingClientRect());
+      });
+    };
+    // Defer initial read to rAF so layout is settled before we measure
+    boundsRafId = requestAnimationFrame(() => {
+      boundsRafId = null;
+      boundsCache = Array.from(CARDS).map((card) => card.getBoundingClientRect());
+    });
+
+    const resizeObserver = new ResizeObserver(refreshBounds);
+    CARDS.forEach((card) => resizeObserver.observe(card));
+    window.addEventListener('scroll', refreshBounds, { passive: true });
+
+    // Throttle pointer updates to one per animation frame
+    let rafId = null;
+    let lastX = 0;
+    let lastY = 0;
+
     const UPDATE = (event) => {
-      for (const CARD of CARDS) {
-        const CARD_BOUNDS = CARD.getBoundingClientRect();
+      lastX = event.x;
+      lastY = event.y;
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        for (let i = 0; i < CARDS.length; i++) {
+          const CARD = CARDS[i];
+          const CARD_BOUNDS = boundsCache[i];
+          if (!CARD_BOUNDS) continue;
 
-        if (
-          event?.x > CARD_BOUNDS.left - CONFIG.proximity &&
-          event?.x < CARD_BOUNDS.left + CARD_BOUNDS.width + CONFIG.proximity &&
-          event?.y > CARD_BOUNDS.top - CONFIG.proximity &&
-          event?.y < CARD_BOUNDS.top + CARD_BOUNDS.height + CONFIG.proximity
-        ) {
-          CARD.style.setProperty('--active', 1);
-        } else {
-          CARD.style.setProperty('--active', CONFIG.opacity);
+          if (
+            lastX > CARD_BOUNDS.left - CONFIG.proximity &&
+            lastX < CARD_BOUNDS.left + CARD_BOUNDS.width + CONFIG.proximity &&
+            lastY > CARD_BOUNDS.top - CONFIG.proximity &&
+            lastY < CARD_BOUNDS.top + CARD_BOUNDS.height + CONFIG.proximity
+          ) {
+            CARD.style.setProperty('--active', 1);
+          } else {
+            CARD.style.setProperty('--active', CONFIG.opacity);
+          }
+
+          const CARD_CENTER = [
+            CARD_BOUNDS.left + CARD_BOUNDS.width * 0.5,
+            CARD_BOUNDS.top + CARD_BOUNDS.height * 0.5,
+          ];
+
+          let ANGLE =
+            (Math.atan2(lastY - CARD_CENTER[1], lastX - CARD_CENTER[0]) * 180) / Math.PI;
+          ANGLE = ANGLE < 0 ? ANGLE + 360 : ANGLE;
+
+          CARD.style.setProperty('--start', ANGLE + 90);
         }
-
-        const CARD_CENTER = [
-          CARD_BOUNDS.left + CARD_BOUNDS.width * 0.5,
-          CARD_BOUNDS.top + CARD_BOUNDS.height * 0.5,
-        ];
-
-        let ANGLE =
-          (Math.atan2(event?.y - CARD_CENTER[1], event?.x - CARD_CENTER[0]) *
-            180) /
-          Math.PI;
-
-        ANGLE = ANGLE < 0 ? ANGLE + 360 : ANGLE;
-
-        CARD.style.setProperty('--start', ANGLE + 90);
-      }
+      });
     };
 
     document.body.addEventListener('pointermove', UPDATE);
@@ -53,18 +84,17 @@ const GlowCard = ({ children , identifier}) => {
       CONTAINER.style.setProperty('--gap', CONFIG.gap);
       CONTAINER.style.setProperty('--blur', CONFIG.blur);
       CONTAINER.style.setProperty('--spread', CONFIG.spread);
-      CONTAINER.style.setProperty(
-        '--direction',
-        CONFIG.vertical ? 'column' : 'row'
-      );
+      CONTAINER.style.setProperty('--direction', CONFIG.vertical ? 'column' : 'row');
     };
 
     RESTYLE();
-    UPDATE();
 
-    // Cleanup event listener
     return () => {
       document.body.removeEventListener('pointermove', UPDATE);
+      window.removeEventListener('scroll', refreshBounds);
+      resizeObserver.disconnect();
+      if (rafId) cancelAnimationFrame(rafId);
+      if (boundsRafId) cancelAnimationFrame(boundsRafId);
     };
   }, [identifier]);
 

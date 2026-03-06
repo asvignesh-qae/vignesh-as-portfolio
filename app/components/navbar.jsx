@@ -1,6 +1,6 @@
 'use client';
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const navLinks = [
   { href: "/#about", label: "ABOUT" },
@@ -15,10 +15,30 @@ const navLinks = [
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+
+  useEffect(() => {
+    const sectionIds = navLinks.map(({ href }) => href.replace("/#", ""));
+    const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-20% 0px -70% 0px" }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <nav
-      className="sticky top-0 z-50 w-full backdrop-blur-md bg-[#0d1224]/90 border-b border-[#1b2c68]/40"
+      className="sticky top-0 z-[60] w-full backdrop-blur-md bg-[#0d1224]/90 border-b border-[#1b2c68]/40"
       aria-label="Main navigation"
     >
       <div className="mx-auto flex items-center justify-between px-6 py-4 sm:px-12 lg:max-w-[70rem] xl:max-w-[76rem] 2xl:max-w-[92rem]">
@@ -32,16 +52,23 @@ function Navbar() {
 
         {/* Desktop nav */}
         <ul className="hidden md:flex md:items-center md:space-x-1" role="list">
-          {navLinks.map(({ href, label }) => (
-            <li key={href}>
-              <Link
-                href={href}
-                className="block px-3 py-2 text-sm text-white transition-colors duration-300 hover:text-pink-500 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#16f2b3] rounded"
-              >
-                {label}
-              </Link>
-            </li>
-          ))}
+          {navLinks.map(({ href, label }) => {
+            const sectionId = href.replace("/#", "");
+            const isActive = activeSection === sectionId;
+            return (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className={`block px-3 py-2 text-sm transition-colors duration-300 hover:text-pink-500 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#16f2b3] rounded ${
+                    isActive ? "text-[#16f2b3] font-semibold" : "text-white"
+                  }`}
+                  aria-current={isActive ? "true" : undefined}
+                >
+                  {label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Hamburger button */}
@@ -69,17 +96,24 @@ function Navbar() {
           className="md:hidden border-t border-[#1b2c68]/40 px-6 py-2 space-y-1"
           role="list"
         >
-          {navLinks.map(({ href, label }) => (
-            <li key={href}>
-              <Link
-                href={href}
-                onClick={() => setMenuOpen(false)}
-                className="block px-4 py-2 text-sm text-white transition-colors duration-300 hover:text-pink-500 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#16f2b3] rounded"
-              >
-                {label}
-              </Link>
-            </li>
-          ))}
+          {navLinks.map(({ href, label }) => {
+            const sectionId = href.replace("/#", "");
+            const isActive = activeSection === sectionId;
+            return (
+              <li key={href}>
+                <Link
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className={`block px-4 py-2 text-sm transition-colors duration-300 hover:text-pink-500 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#16f2b3] rounded ${
+                    isActive ? "text-[#16f2b3] font-semibold" : "text-white"
+                  }`}
+                  aria-current={isActive ? "true" : undefined}
+                >
+                  {label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       )}
     </nav>

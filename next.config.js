@@ -1,6 +1,14 @@
 const path = require('path')
- 
+
 module.exports = {
+  compress: true,
+  experimental: {
+    optimizePackageImports: [
+      'react-icons',
+      '@vercel/analytics',
+      '@vercel/speed-insights',
+    ],
+  },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
