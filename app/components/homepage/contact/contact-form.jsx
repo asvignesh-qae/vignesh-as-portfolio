@@ -210,8 +210,7 @@ function ContactForm() {
               width: 0,
               height: 0,
             }}
-            aria-hidden="true"
-            tabIndex={-1}
+            aria-label="Leave this field empty"
             autoComplete="off"
           />
 
