@@ -166,24 +166,26 @@ function HeroSection() {
             Hello, <br />
             This is <span className=" text-pink-500">{personalData.name}</span>
             {`, I'm a `}
-            <TypeAnimation
-              sequence={[
-                "Senior Software Test Automation Engineer",
-                1500,
-                "Test Automation Architect",
-                1500,
-                "CI/CD Integration Specialist",
-                1500,
-                "Accessibility Testing Advocate",
-                1500,
-                "Senior SDET",
-                1500,
-              ]}
-              wrapper="span"
-              speed={50}
-              className="text-[#16f2b3]"
-              repeat={Infinity}
-            />
+            <span className="block min-h-[5rem] lg:min-h-[7rem]">
+              <TypeAnimation
+                sequence={[
+                  "Senior Software Test Automation Engineer",
+                  1500,
+                  "Test Automation Architect",
+                  1500,
+                  "CI/CD Integration Specialist",
+                  1500,
+                  "Accessibility Testing Advocate",
+                  1500,
+                  "Senior SDET",
+                  1500,
+                ]}
+                wrapper="span"
+                speed={50}
+                className="text-[#16f2b3]"
+                repeat={Infinity}
+              />
+            </span>
           </h1>
 
           <p className="mt-4 text-sm text-gray-400 italic lg:text-base">

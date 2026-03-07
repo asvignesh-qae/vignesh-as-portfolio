@@ -26,7 +26,8 @@ function validate(field, value) {
         return `Message must be at least ${MIN_MESSAGE_LENGTH} characters.`;
       return "";
     case "consent":
-      if (!value) return "You must consent to data processing to send a message.";
+      if (!value)
+        return "You must consent to data processing to send a message.";
       return "";
     default:
       return "";
@@ -35,9 +36,24 @@ function validate(field, value) {
 
 function ContactForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const [userInput, setUserInput] = useState({ name: "", email: "", message: "", website: "" });
-  const [errors, setErrors] = useState({ name: "", email: "", message: "", consent: "" });
-  const [touched, setTouched] = useState({ name: false, email: false, message: false, consent: false });
+  const [userInput, setUserInput] = useState({
+    name: "",
+    email: "",
+    message: "",
+    website: "",
+  });
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    message: "",
+    consent: "",
+  });
+  const [touched, setTouched] = useState({
+    name: false,
+    email: false,
+    message: false,
+    consent: false,
+  });
   const [consent, setConsent] = useState(false);
 
   const handleChange = (field, value) => {
@@ -49,14 +65,19 @@ function ContactForm() {
 
   const handleBlur = (field) => {
     setTouched((prev) => ({ ...prev, [field]: true }));
-    setErrors((prev) => ({ ...prev, [field]: validate(field, userInput[field]) }));
+    setErrors((prev) => ({
+      ...prev,
+      [field]: validate(field, userInput[field]),
+    }));
   };
 
   const inputClass = (field) => {
     const base =
       "bg-[#10172d] w-full border rounded-md ring-0 outline-0 transition-all duration-300 px-3 py-2";
-    if (touched[field] && errors[field]) return `${base} border-red-500 focus:border-red-500`;
-    if (touched[field] && !errors[field] && userInput[field]) return `${base} border-[#16f2b3]`;
+    if (touched[field] && errors[field])
+      return `${base} border-red-500 focus:border-red-500`;
+    if (touched[field] && !errors[field] && userInput[field])
+      return `${base} border-[#16f2b3]`;
     return `${base} border-[#353a52] focus:border-[#16f2b3]`;
   };
 
@@ -68,14 +89,22 @@ function ContactForm() {
     const messageErr = validate("message", userInput.message);
     const consentErr = validate("consent", consent);
 
-    setErrors({ name: nameErr, email: emailErr, message: messageErr, consent: consentErr });
+    setErrors({
+      name: nameErr,
+      email: emailErr,
+      message: messageErr,
+      consent: consentErr,
+    });
     setTouched({ name: true, email: true, message: true, consent: true });
 
     if (nameErr || emailErr || messageErr || consentErr) return;
 
     try {
       setIsLoading(true);
-      await axios.post(`${process.env.NEXT_PUBLIC_APP_URL}/api/contact`, userInput);
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/contact`,
+        userInput,
+      );
       toast.success("Message sent successfully!");
       setUserInput({ name: "", email: "", message: "", website: "" });
       setErrors({ name: "", email: "", message: "", consent: "" });
@@ -95,11 +124,11 @@ function ContactForm() {
       </p>
       <div className="max-w-3xl text-white rounded-lg border border-[#464c6a] p-3 lg:p-5">
         <h3 className="text-lg font-semibold bg-gradient-to-r from-pink-500 to-violet-600 bg-clip-text text-transparent mb-2">
-          Let&apos;s build something great
+          Got a project in mind?
         </h3>
         <p className="text-sm text-[#d3d8e8]">
           {
-            "Currently open to Senior SDET / Test Automation Engineer roles in the Hungary/EU. Reach out and let's talk."
+            "Currently open to Senior SDET / Test Automation Engineer roles and freelance projects in Hungary and across the EU. Reach out — let's talk and build something remarkable together."
           }
         </p>
         <div className="mt-6 flex flex-col gap-4">
@@ -246,11 +275,18 @@ function ContactForm() {
                 }}
                 required
                 aria-required="true"
-                aria-invalid={touched.consent && !!errors.consent ? "true" : "false"}
-                aria-describedby={errors.consent ? "consent-error" : "consent-hint"}
+                aria-invalid={
+                  touched.consent && !!errors.consent ? "true" : "false"
+                }
+                aria-describedby={
+                  errors.consent ? "consent-error" : "consent-hint"
+                }
                 className="mt-1 h-4 w-4 shrink-0 accent-[#16f2b3] cursor-pointer"
               />
-              <label htmlFor="contact-consent" className="text-xs text-[#a0a8c0] leading-relaxed cursor-pointer">
+              <label
+                htmlFor="contact-consent"
+                className="text-xs text-[#a0a8c0] leading-relaxed cursor-pointer"
+              >
                 I consent to my name, email address, and message being processed
                 by Vignesh Ambalam Suresh solely to respond to this inquiry. See
                 the{" "}
@@ -261,17 +297,24 @@ function ContactForm() {
                   Privacy Policy
                 </Link>{" "}
                 for details on data handling, retention, and your rights.{" "}
-                <span className="text-red-400" aria-hidden="true">*</span>
+                <span className="text-red-400" aria-hidden="true">
+                  *
+                </span>
               </label>
             </div>
             {touched.consent && errors.consent && (
-              <p id="consent-error" role="alert" className="text-xs text-red-400 ml-7">
+              <p
+                id="consent-error"
+                role="alert"
+                className="text-xs text-red-400 ml-7"
+              >
                 {errors.consent}
               </p>
             )}
             {!errors.consent && (
               <p id="consent-hint" className="sr-only">
-                Required. You must consent to data processing to submit this form.
+                Required. You must consent to data processing to submit this
+                form.
               </p>
             )}
           </div>
