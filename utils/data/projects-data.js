@@ -55,17 +55,17 @@ export const projectsData = [
       "GitHub Actions",
     ],
     role: "Senior Software Test Automation Engineer / SDET",
-    code: "https://github.com/asvignesh-qae/Genesys-Demo/blob/main/README.md",
+    code: "https://github.com/asvignesh-qae/Selenium-Demo/blob/main/README.md",
     demo: "",
     liveReports: [
       {
         label: "Allure TestNG Report",
-        url: "https://asvignesh-qae.github.io/Genesys-Demo/testng/",
+        url: "https://asvignesh-qae.github.io/Selenium-Demo/testng/",
         type: "allure",
       },
       {
         label: "Allure Cucumber Report",
-        url: "https://asvignesh-qae.github.io/Genesys-Demo/cucumber/",
+        url: "https://asvignesh-qae.github.io/Selenium-Demo/cucumber/",
         type: "allure",
       },
     ],
