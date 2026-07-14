@@ -45,5 +45,5 @@ export const personalData = {
   codeWars: "https://www.codewars.com/users/logicchaser14",
   devUsername: "logicchaser14",
   resume:
-    "https://drive.google.com/file/d/1V6LdzuGE6foVcmLl0rKhhyunxb6ZeSW-/view?usp=sharing",
+    "https://drive.google.com/file/d/1lkZy8WrLEWJM8KjA5PWxl63wPwaUfvuI/view?usp=sharing",
 };
