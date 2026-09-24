@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { FaTimes, FaChartBar, FaUniversalAccess } from 'react-icons/fa';
+import { FaTimes, FaChartBar, FaUniversalAccess, FaPlay } from 'react-icons/fa';
 import { BsCircleFill } from 'react-icons/bs';
 import dynamic from 'next/dynamic';
 
@@ -70,17 +70,36 @@ function toRawGitHubUrl(url) {
   return null;
 }
 
+function toEmbeddableVideoUrl(url) {
+  // YouTube: watch?v=<id>, youtu.be/<id>, shorts/<id> -> privacy-enhanced embed
+  const youtube = url.match(
+    /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/
+  );
+  if (youtube) {
+    return `https://www.youtube-nocookie.com/embed/${youtube[1]}?rel=0`;
+  }
+  // Google Drive: /file/d/<id>/view -> /preview (Drive blocks framing /view)
+  const drive = url.match(/drive\.google\.com\/file\/d\/([^/?]+)/);
+  if (drive) {
+    return `https://drive.google.com/file/d/${drive[1]}/preview`;
+  }
+  return url;
+}
+
 function ProjectCard({ project }) {
   const [previewUrl, setPreviewUrl] = useState(null);
   const [markdown, setMarkdown] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [videoOpen, setVideoOpen] = useState(false);
   const triggerRef = useRef(null);
   const closeButtonRef = useRef(null);
+  const videoTriggerRef = useRef(null);
+  const videoCloseButtonRef = useRef(null);
 
   // Lock body scroll when modal is open
   useEffect(() => {
-    if (previewUrl) {
+    if (previewUrl || videoOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -88,7 +107,21 @@ function ProjectCard({ project }) {
     return () => {
       document.body.style.overflow = '';
     };
-  }, [previewUrl]);
+  }, [previewUrl, videoOpen]);
+
+  // Focus close button and close on Escape for the video modal
+  useEffect(() => {
+    if (!videoOpen) return;
+    videoCloseButtonRef.current?.focus();
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setVideoOpen(false);
+        setTimeout(() => videoTriggerRef.current?.focus(), 0);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [videoOpen]);
 
   // Focus close button when modal opens
   useEffect(() => {
@@ -149,6 +182,11 @@ function ProjectCard({ project }) {
   const handleCloseModal = () => {
     setPreviewUrl(null);
     setTimeout(() => triggerRef.current?.focus(), 0);
+  };
+
+  const handleCloseVideo = () => {
+    setVideoOpen(false);
+    setTimeout(() => videoTriggerRef.current?.focus(), 0);
   };
 
   return (
@@ -240,11 +278,61 @@ function ProjectCard({ project }) {
         document.body
       )}
 
+      {videoOpen && createPortal(
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-3 sm:p-5"
+          onClick={handleCloseVideo}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="video-modal-title"
+            className="relative w-full max-w-5xl bg-[#0d1117] rounded-xl border border-[#30363d] shadow-2xl flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              ref={videoCloseButtonRef}
+              onClick={handleCloseVideo}
+              className="absolute -top-3 -right-3 z-10 flex items-center justify-center w-9 h-9 rounded-full bg-[#21262d] border border-[#30363d] text-[#8b949e] hover:text-white hover:bg-[#30363d] transition-all duration-200 shadow-lg"
+              aria-label="Close demo video"
+            >
+              <FaTimes size={16} aria-hidden="true" />
+            </button>
+            <p id="video-modal-title" className="px-4 lg:px-6 py-3 bg-[#161b22] border-b border-[#30363d] rounded-t-xl text-sm text-white">
+              {project.name} — Demo
+            </p>
+            <div className="relative w-full aspect-video">
+              <iframe
+                src={toEmbeddableVideoUrl(project.video)}
+                title={`${project.name} demo video`}
+                className="absolute inset-0 w-full h-full rounded-b-xl"
+                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+
       <div className="overflow-hidden border-t-[2px] border-indigo-900 px-4 lg:px-8 py-4 lg:py-8">
           {project.executiveSummary && (
             <p className="mb-5 text-sm md:text-base font-bold text-white leading-snug border-l-4 border-[#16f2b3] pl-3 bg-[#16f2b3]/5 py-2 rounded-r-md">
               {project.executiveSummary}
             </p>
+          )}
+
+          {project.video && (
+            <button
+              ref={videoTriggerRef}
+              onClick={() => setVideoOpen(true)}
+              aria-haspopup="dialog"
+              className="mb-5 inline-flex items-center gap-2.5 px-4 py-2 rounded-lg bg-pink-500/10 border border-pink-500/30 text-pink-400 text-sm font-medium hover:bg-pink-500/20 hover:border-pink-500/60 transition-all duration-200"
+              aria-label={`Watch demo video for ${project.name}`}
+            >
+              <FaPlay size={12} aria-hidden="true" />
+              <span>Watch Demo Video</span>
+            </button>
           )}
 
           {project.liveReports?.length > 0 && (

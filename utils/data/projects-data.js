@@ -78,13 +78,7 @@ export const projectsData = [
       "Built an automated API testing suite for Groq AI endpoints using Postman collection, Newman CLI, and GitHub Actions CI/CD — covering chat completions, multilingual translation, audio transcription, and image OCR with scheduled runs every 8 hours and secure HTML reports on GitHub Pages.",
     description:
       "Designed and implemented an automated API testing suite to validate Groq AI endpoints across LLM chat completions, multilingual translation (Tamil, Japanese, German), audio transcription via Whisper models, and image OCR. Organized 15 requests across 4 test groups with JSON schema validation and language-specific keyword assertions. Integrated Newman CLI runner with GitHub Actions for scheduled execution every 8 hours and on every push/PR. API keys and tokens are secured as GitHub Secrets and are never exposed in the codebase. Implemented automatic redaction of API keys, bearer tokens, and authorization headers from both request headers and request body in the published HTML reports on GitHub Pages.",
-    tools: [
-      "Postman",
-      "Newman",
-      "Groq LLM's",
-      "GitHub Actions",
-      "Node.js",
-    ],
+    tools: ["Postman", "Newman", "Groq LLM's", "GitHub Actions", "Node.js"],
     role: "Senior Software Test Automation Engineer / SDET",
     code: "https://github.com/asvignesh-qae/groq-api-testing-postman-newman/blob/main/README.md",
     demo: "",
@@ -96,7 +90,22 @@ export const projectsData = [
       },
     ],
     impact: `Automated validation of 6 Groq AI models across 15 API requests with scheduled CI/CD runs every 8 hours, ensuring continuous reliability of AI endpoints. API tokens and credentials are never displayed in the published HTML reports — all sensitive values are automatically masked, keeping reports safe to share publicly.`,
-  }
+  },
+  {
+    id: 5,
+    name: "AI Test Script Generator – Chrome Extension (EPAM Hackathon 2025 Winner)",
+    executiveSummary:
+      "Won the EPAM Hackathon 2025 with an AI-powered Chrome extension that captures the live DOM and auto-generates test scripts for Selenium, Cypress and Playwright.",
+    description:
+      "Developed an AI-powered Chrome extension using LLM integration to auto-generate cross-framework test scripts (Selenium, Cypress, Playwright) from live DOM capture.",
+    tools: ["Chrome Extension", "JavaScript", "AI", "Groq"],
+    role: "Senior Software Test Automation Engineer / SDET",
+    code: "",
+    demo: "",
+    video: "https://youtu.be/N7opRICrRqs",
+    liveReports: [],
+    impact: `Winner of the EPAM Hackathon 2025`,
+  },
 ];
 
 // Do not remove any property.
@@ -110,5 +119,6 @@ export const projectsData = [
 //     role: '',
 //     code: '',
 //     demo: '',
+//     video: '',
 //     liveReports: [],
 // },
