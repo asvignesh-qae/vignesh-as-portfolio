@@ -306,7 +306,7 @@ function ProjectCard({ project }) {
                 src={toEmbeddableVideoUrl(project.video)}
                 title={`${project.name} demo video`}
                 className="absolute inset-0 w-full h-full rounded-b-xl"
-                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen"
                 allowFullScreen
               />
             </div>
